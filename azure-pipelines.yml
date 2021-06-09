@@ -9,26 +9,29 @@ trigger:
 pool: Default
 
 steps:
+- task: NodeTool@0
+  displayName: Install Node.js
+  inputs:
+    versionSpec: '14.x'
+- task: Npm@1
+  displayName: Install Angular
+  inputs:
+    command: 'custom'
+    workingDir: 'BookClubClient'
+    customCommand: 'install -g @angular/cli@latest'
 - task: Npm@1
   displayName: Npm Install
   inputs:
     command: 'install'
     workingDir: 'BookClubClient'
-
 - task: Npm@1
-  displayName: Npm install latest angular globally
-  inputs:
-    command: 'custom'
-    workingDir: 'BookClubClient'
-    customCommand: 'install -g @angular/cli@latest'
-
-- task: Npm@1
-  displayName: Npm Run Build
+  displayName: Npm Build
   inputs:
     command: 'custom'
     workingDir: 'BookClubClient'
     customCommand: 'run build'
 - task: AzureRmWebAppDeployment@4
+  displayName: Azure Deploy
   inputs:
     ConnectionType: 'AzureRM'
     azureSubscription: 'Azure subscription 1(b5a73573-c365-4df4-90d9-79329c2413a9)'
