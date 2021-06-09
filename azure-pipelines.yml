@@ -1,22 +1,38 @@
-# Node.js with Angular
-# Build a Node.js project that uses Angular.
-# Add steps that analyze code, save build artifacts, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
 
 trigger:
 - main
 
-pool:
-  vmImage: ubuntu-latest
+pool: Default
 
 steps:
-- task: NodeTool@0
+- task: Npm@1
+  displayName: Npm Install
   inputs:
-    versionSpec: '14.x'
-  displayName: 'Install Node.js'
+    command: 'install'
+    workingDir: 'BookClubClient'
 
-- script: |
-    npm install -g @angular/cli
-    npm install
-    ng build --prod
-  displayName: 'npm install and build'
+- task: Npm@1
+  displayName: Npm install latest angular globally
+  inputs:
+    command: 'custom'
+    workingDir: 'BookClubClient'
+    customCommand: 'install -g @angular/cli@latest'
+
+- task: Npm@1
+  displayName: Npm Run Build
+  inputs:
+    command: 'custom'
+    workingDir: 'BookClubClient'
+    customCommand: 'run build'
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'Azure subscription 1(b5a73573-c365-4df4-90d9-79329c2413a9)'
+    appType: 'webAppLinux'
+    WebAppName: 'BookClub'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/dist/BookClubClient'
+    RuntimeStack: 'NODE|14-lts'
