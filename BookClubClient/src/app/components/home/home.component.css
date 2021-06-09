@@ -1,0 +1,27 @@
+#side-menu {
+    background-color: lightgrey;
+    width: 10%;
+    border: 15px solid green;
+    padding: 0px;
+    margin: 20px;
+   float: right;
+  }
+
+
+  #home-content {
+    background-color: lightgrey;
+    width: 80%;
+    border: 15px solid green;
+    padding: 50px;
+    margin: 20px;
+    float: left;
+    
+   
+  }
+  ul {
+    list-style: none;
+  }
+  
+  #side-menu{
+      text-align: left;
+  }
