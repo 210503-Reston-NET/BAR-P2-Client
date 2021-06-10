@@ -1,0 +1,38 @@
+<br/>
+<div class="container">
+  <div class="row">
+   
+    <div class="col-md-12">
+     <div class="card" >
+        <div class="card-header">Book list</div>
+        <br/>
+        
+          <table class="table  table-sm"  >
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Author</th>   
+              <th>ISBN</th>   
+              <th>Category</th>   
+              <th colspan="2">Details</th>          
+            </tr>
+          </thead>
+          <tbody >
+            <tr *ngFor="let book of books" class="clickable">
+              <td>{{book.title}}</td>
+              <td>{{book.author}}</td>
+              <td>{{book.isbn}}</td>
+              <td>{{book.categoryName}}</td>
+              <td><button type="button" class="btn btn-primary" >read</button></td>
+              <td><button type="button" class="btn btn-warning" >recommand</button></td>
+              <td><button type="button" class="btn btn-success" >ToRead</button></td>
+            </tr>           
+          </tbody>
+        </table>      
+        
+    </div>
+    <br/>
+    <div class="row"><button class="btn btn-success" >Add</button></div>  
+  </div>
+
+</div>
