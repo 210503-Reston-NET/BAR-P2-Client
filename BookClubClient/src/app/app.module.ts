@@ -4,17 +4,25 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { MenuComponent } from './components/menu/menu.component';
 import { HomeComponent } from './components/home/home.component';
 import { BookComponent } from './components/book/book.component';
+import { BookclubComponent } from './components/bookclub/bookclub.component';
+import { ClubpostComponent } from './components/clubpost/clubpost.component';
+import { WelcomeComponent } from './components/welcome/welcome.component';
+import { HeaderComponent } from './components/header/header.component';
+import { SidemenuComponent } from './components/sidemenu/sidemenu.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FooterComponent,
-    MenuComponent,
     HomeComponent,
-    BookComponent
+    BookComponent,
+    BookclubComponent,
+    ClubpostComponent,
+    WelcomeComponent,
+    HeaderComponent,
+    SidemenuComponent
   ],
   imports: [
     BrowserModule,

@@ -16,8 +16,6 @@ public books:any;
     .subscribe(
       data=>{
       this.books=data;
-      console.log("---------------------------")
-      console.log(data)
       },
       error=>{console.error();
       }

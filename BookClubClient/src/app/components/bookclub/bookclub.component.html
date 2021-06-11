@@ -1,0 +1,20 @@
+
+
+
+<div class="container">
+<div class="row"><button class="btn btn-success" >Create bookclub</button></div>  
+<ul *ngFor="let b of bookclubs">
+<div class="card" style="width: 80rem;">
+    <img src="..." class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title"><li>{{b.name}}</li></h5>
+      <p class="card-text"> <li>{{b.description}}</li></p>
+      <div class="card-body">
+        <a href="#" class="card-link">new post</a> &nbsp;&nbsp;&nbsp;
+        <a href="#" class="card-link">view post</a>
+      </div>
+    </div>
+  </div>
+
+
+</ul>
