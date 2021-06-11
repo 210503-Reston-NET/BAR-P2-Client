@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { BookComponent } from './components/book/book.component';
 import { BookclubComponent } from './components/bookclub/bookclub.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
+import { AuthGuard } from '@auth0/auth0-angular';
 
 const routes: Routes = [
   {
@@ -13,21 +14,25 @@ const routes: Routes = [
   {
     path: 'books',
     component:BookComponent,
+    canActivate: [AuthGuard]
   },
 
   {
     path: 'bookclubs',
     component:BookclubComponent,
+    canActivate: [AuthGuard]
   },
 
 
   {
     path: 'bookclub',
     component:BookclubComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'clubpost',
     component:BookclubComponent,
+    canActivate: [AuthGuard]
   }
 ];
 
