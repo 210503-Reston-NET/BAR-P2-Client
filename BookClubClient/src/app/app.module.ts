@@ -12,6 +12,8 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
 import { HeaderComponent } from './components/header/header.component';
 import { SidemenuComponent } from './components/sidemenu/sidemenu.component';
 import { AuthModule } from '@auth0/auth0-angular';
+import { AuthComponent } from './components/auth/auth.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,11 +25,16 @@ import { AuthModule } from '@auth0/auth0-angular';
     WelcomeComponent,
     HeaderComponent,
     SidemenuComponent,
+    AuthComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    AuthModule.forRoot({
+      domain: 'dev-x71beo2n.us.auth0.com',
+      clientId: 'azfH6PT1l2ys746UeGZ9aOOasSAFqQfW'
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent],
