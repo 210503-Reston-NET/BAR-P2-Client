@@ -11,7 +11,7 @@ import { ClubpostComponent } from './components/clubpost/clubpost.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { HeaderComponent } from './components/header/header.component';
 import { SidemenuComponent } from './components/sidemenu/sidemenu.component';
-
+import { AuthModule } from '@auth0/auth0-angular';
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +22,7 @@ import { SidemenuComponent } from './components/sidemenu/sidemenu.component';
     ClubpostComponent,
     WelcomeComponent,
     HeaderComponent,
-    SidemenuComponent
+    SidemenuComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,6 +30,7 @@ import { SidemenuComponent } from './components/sidemenu/sidemenu.component';
     HttpClientModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  
 })
 export class AppModule { }
