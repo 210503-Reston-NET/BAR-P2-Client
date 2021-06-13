@@ -39,6 +39,7 @@ import { ProfileComponent } from './components/profile/profile.component';
     }),
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  
 })
 export class AppModule { }
