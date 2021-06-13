@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  HOSTAPI:'https://bookclubapi.azurewebsites.net/api/',
+  DOMAIN: 'dev-x71beo2n.us.auth0.com',
+  CLIENTID: 'azfH6PT1l2ys746UeGZ9aOOasSAFqQfW',
 };
 
 /*

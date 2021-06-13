@@ -1,0 +1,14 @@
+  
+#previous-club-post{
+    padding: 2em 10em 2em 10em;
+}
+
+li{list-style-type: none;}
+
+#like:active{
+    color: green;
+  }
+
+#dislike:active{
+    color: red;
+  }
