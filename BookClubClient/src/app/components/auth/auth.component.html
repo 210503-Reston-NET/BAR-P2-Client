@@ -1,6 +1,5 @@
 <div class="d-flex flex-row-reverse">
     <ng-container *ngIf= "auth.isAuthenticated$ | async; else loggedOut">
-        <a class="nav-link active" aria-current="page" routerLink="Profile">Profile</a>
         <button class="btn btn-outline-secondary" (click) = "auth.logout({ returnTo: document.location.origin })">Log out</button>
     </ng-container>
     <ng-template #loggedOut>
