@@ -13,6 +13,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { SidemenuComponent } from './components/sidemenu/sidemenu.component';
 import { AuthModule } from '@auth0/auth0-angular';
 import { AuthComponent } from './components/auth/auth.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { AuthComponent } from './components/auth/auth.component';
     WelcomeComponent,
     HeaderComponent,
     SidemenuComponent,
-    AuthComponent
+    AuthComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
