@@ -1,5 +1,6 @@
 <div class="full-profile container transparent">
     <div class ="user-email" *ngIf="auth.user$ | async as user">
+        <h3>User Profile</h3>
         <h1>{{user.email}}</h1>
     </div>
 
