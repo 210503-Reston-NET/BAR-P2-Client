@@ -1,20 +1,27 @@
-
-
-
 <div class="container">
-<div class="row"><button class="btn btn-success" >Create bookclub</button></div>  
-<ul *ngFor="let b of bookclubs">
-<div class="card" style="width: 80rem;">
-    <img src="..." class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title"><li>{{b.name}}</li></h5>
-      <p class="card-text"> <li>{{b.description}}</li></p>
+  <div class="row"><button class="btn btn-success">Create bookclub</button></div>
+  <ul *ngFor="let b of bookclubs">
+    <div class="card" style="width: 80rem;">
+      <img src="..." class="card-img-top" alt="...">
       <div class="card-body">
-        <a href="#" class="card-link">new post</a> &nbsp;&nbsp;&nbsp;
-        <a href="#" class="card-link">view post</a>
+        <h5 class="card-title">
+          <li>{{b.name}}</li>
+        </h5>
+        <p class="card-text">
+          <li>{{b.description}}</li>
+        </p>
+        <span hidden id="bookClubId">{{b.Id}}</span>
+        <h5 class="card-title"><span><span>Like: {{b.totalLike}}</span> | <span>Dislike:{{b.totalDislike}}</span></span>
+        </h5>
+
+        <div class="card-body">
+          <a [routerLink]="['/AddClubPost', b.id,b.name,true]" class="card-link">new post</a> &nbsp;&nbsp;&nbsp;
+          <a [routerLink]="['/Viewclubpost', b.id,b.name,false]" class="card-link">view post</a> &nbsp;&nbsp;&nbsp;
+          <a class="card-link"><i class="fas fa-thumbs-up" id="like" (click)="doLike(b.Id)"></i></a> &nbsp;&nbsp;&nbsp;
+          <a class="card-link"><i class="fas fa-thumbs-down" id="dislike" (click)="doDisLike(b.Id)"></i></a>
+        </div>
       </div>
     </div>
-  </div>
+  </ul>
 
-
-</ul>
+</div>

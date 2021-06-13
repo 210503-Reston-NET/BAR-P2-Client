@@ -1,5 +1,11 @@
 export interface clubPost {
-    id: number,
-    email: string,
-    ISBN: number
+    Id:number,
+    user: string,
+    BookClubID: number,
+    totalLike: number,
+    totalDislike: number,
+    post: string,
+    BookClubTitle?: string,
 }
+
+

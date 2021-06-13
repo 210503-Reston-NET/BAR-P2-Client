@@ -1,0 +1,30 @@
+<div class="container">
+
+    <ng-container >
+      
+<div class="row">
+      <div class="col-md-3"></div>
+
+      <div id="previous-club-post" class="col-md-6"> 
+          <p> coments here</p>
+        <ul *ngFor="let b of clubposts">
+            <div class="card" style="width: 80rem;">
+               
+                <div class="card-body">
+                  <h5 class="card-title"><li>{{b.post}}</li></h5>
+                  <p class="card-text"> <li>{{b.user}}</li></p>
+                  <h5 class="card-title"><span><span>Like: {{b.totalLike}}</span> | <span>Dislike:{{b.totalDislike}}</span></span></h5>
+                  <div class="card-body" >
+                    <a class="card-link" ><i class="fas fa-thumbs-up" id="like" (click)="doLike(b.Id)"></i></a> &nbsp;&nbsp;&nbsp;
+                    <a  class="card-link"  ><i class="fas fa-thumbs-down" id="dislike" (click)="doDisLike(b.Id)"></i></a>
+                  </div>
+                </div>
+              </div>
+              <hr />
+            </ul>
+      </div>
+      <div class="col-md-3"></div>
+    </div>
+</ng-container>
+
+

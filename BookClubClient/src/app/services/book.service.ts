@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 import { book } from '../models/book';
 
 
@@ -7,23 +8,15 @@ import { book } from '../models/book';
   providedIn: 'root'
 })
 export class BookService {
- host:string='https://bookclubapi.azurewebsites.net/api/Book'
 
-  //host:string='https://localhost:44309/api/Book';
 
   constructor(private http:HttpClient) { }
 
   getBooks(){
 
-    return this.http.get(this.host);
+    return this.http.get(environment.HOSTAPI+"/Book");
 
   
   }
-
-  /*getBooks():Promise<book[]>{
-    return this.http.get<book[]>(this.host).toPromise();
-  }
-*/
-
 
 }

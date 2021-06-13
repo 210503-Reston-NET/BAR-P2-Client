@@ -13,6 +13,8 @@ import { HeaderComponent } from './components/header/header.component';
 import { SidemenuComponent } from './components/sidemenu/sidemenu.component';
 import { AuthModule } from '@auth0/auth0-angular';
 import { AuthComponent } from './components/auth/auth.component';
+import { FormsModule } from '@angular/forms';
+import { ViewClubpostsComponent } from './components/view-clubposts/view-clubposts.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import { AuthComponent } from './components/auth/auth.component';
     WelcomeComponent,
     HeaderComponent,
     SidemenuComponent,
-    AuthComponent
+    AuthComponent,
+    ViewClubpostsComponent
   ],
   imports: [
     BrowserModule,
@@ -35,6 +38,7 @@ import { AuthComponent } from './components/auth/auth.component';
       domain: 'dev-x71beo2n.us.auth0.com',
       clientId: 'azfH6PT1l2ys746UeGZ9aOOasSAFqQfW'
     }),
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
