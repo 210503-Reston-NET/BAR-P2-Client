@@ -4,3 +4,9 @@ export interface user {
     address: string,
     pagesRead: number
 }
+
+export interface FollowUser {
+    id: number,
+    followerEmail: string,
+    followedEmail: string
+}

@@ -1,31 +1,15 @@
 <div class="full-profile container transparent">
-    <div class ="user-email" *ngIf="auth.user$ | async as user">
+    <div class ="user-email" *ngIf="userEmail">
         <h3>User Profile</h3>
-        <h1>{{user.email}}</h1>
+        <h1>{{userEmail}}</h1>
+    </div>
+    <div class="follow" *ngIf="isFollowing == true">
+        <button>Unfollow</button>
+    </div>
+    <div class="follow" *ngIf="isFollowing == false">
+        <button (click)="Follow()">follow</button>
     </div>
 
-    <div>
-        <input type="search" placeholder="Search Books" #search id="search" />
-        <button (click)="BookSearch(search.value)">Search</button>
-    </div>
-
-    <div *ngIf="googleBooks" id="f">
-        <div class="container">
-            <div class="card google-results" *ngFor="let googleBook of googleBooks">
-                <img src={{googleBook.volumeInfo.imageLinks.smallThumbnail}} class="card-img-top" alt="">
-                <div class="card-body">
-                    <h5 class="card-title">{{googleBook.volumeInfo.title}}</h5>
-                    <p class="card-text">{{googleBook.volumeInfo.authors[0]}}</p>
-                    <div *ngIf="auth.user$ | async as user">
-                        <button (click)="AddBookToFavorite(googleBook.volumeInfo.industryIdentifiers[0].identifier, googleBook.volumeInfo.title, googleBook.volumeInfo.authors[0], googleBook.volumeInfo.categories[0], user.email)">add to Favorite</button>
-                        <button (click)="AddBookToRead(googleBook.volumeInfo.industryIdentifiers[0].identifier, googleBook.volumeInfo.title, googleBook.volumeInfo.authors[0], googleBook.volumeInfo.categories[0], user.email)">add to reading list</button>
-                        <button (click)="AddBooksRead(googleBook.volumeInfo.industryIdentifiers[0].identifier, googleBook.volumeInfo.title, googleBook.volumeInfo.authors[0], googleBook.volumeInfo.categories[0], googleBook.volumeInfo.pageCount, user.email)">already read </button>
-                    </div>
-                    
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="container" >
         <div class="row">
             <div class="col-sm" *ngIf="booksToRead" id="f">
@@ -78,10 +62,7 @@
         </div>
     </div>
     <div class="user-posts">
-        <div>
-            <input type="text" placeholder="make a post" #post />
-            <button (click)="MakePost(post.value)">POST</button>
-        </div>
+        
         <div *ngIf="userPosts" id="f">
             <div class="post" *ngFor="let userPost of userPosts">
                 <h6>{{userPost.email}}</h6>
