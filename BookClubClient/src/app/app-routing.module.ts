@@ -7,6 +7,8 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { ExploreComponent } from './components/explore/explore.component';
 import { AccountComponent } from './components/account/account.component'
 import { AuthGuard } from '@auth0/auth0-angular';
+import { ClubpostComponent } from './components/clubpost/clubpost.component';
+import { ViewClubpostsComponent } from './components/view-clubposts/view-clubposts.component';
 
 const routes: Routes = [
   {
@@ -51,6 +53,27 @@ const routes: Routes = [
   {
     path: 'clubpost',
     component:BookclubComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'Viewclubpost/:clubId/:BookClubTitle',
+    component:ViewClubpostsComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'AddClubPost/:clubId/:BookClubTitle',
+    component:ClubpostComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'AddClubPost/:clubId/:BookClubTitle',
+    component:ClubpostComponent,
+    canActivate: [AuthGuard]
+  },
+
+  {
+    path: 'ClubPosts/:clubId',
+    component:ClubpostComponent,
     canActivate: [AuthGuard]
   }
 ];

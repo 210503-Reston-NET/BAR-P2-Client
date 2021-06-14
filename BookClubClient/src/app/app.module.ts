@@ -16,6 +16,8 @@ import { AuthComponent } from './components/auth/auth.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ExploreComponent } from './components/explore/explore.component';
 import { AccountComponent } from './components/account/account.component';
+import { environment } from 'src/environments/environment';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -38,9 +40,10 @@ import { AccountComponent } from './components/account/account.component';
     AppRoutingModule,
     HttpClientModule,
     AuthModule.forRoot({
-      domain: 'dev-x71beo2n.us.auth0.com',
-      clientId: 'azfH6PT1l2ys746UeGZ9aOOasSAFqQfW'
+      domain: environment.DOMAIN,
+      clientId: environment.CLIENTID
     }),
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
