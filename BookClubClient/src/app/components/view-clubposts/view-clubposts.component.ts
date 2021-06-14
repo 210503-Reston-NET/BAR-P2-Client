@@ -10,7 +10,7 @@ import { BookclubService } from 'src/app/services/bookclub.service';
 })
 export class ViewClubpostsComponent implements OnInit {
   newpost:clubPost={
-    Id:0,
+    id:0,
     user: '',
     BookClubID: 0,
     totalLike: 0,
@@ -26,7 +26,7 @@ export class ViewClubpostsComponent implements OnInit {
     let clubId=this.router.snapshot.params['clubId']
     this.newpost.BookClubTitle=this.router.snapshot.params['BookClubTitle'];
     this.service.GetClubPostByBookClub(clubId).then(result => { this.clubposts = result });
-  }
+      }
 
   doLike(clubpostId:number){
     alert("thank for your like")

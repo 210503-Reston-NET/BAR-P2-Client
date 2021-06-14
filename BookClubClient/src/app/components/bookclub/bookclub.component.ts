@@ -21,6 +21,7 @@ export class BookclubComponent implements OnInit {
     .subscribe(
       data=>{
       this.bookclubs=data;
+     
       },
       error=>{console.error();
       }

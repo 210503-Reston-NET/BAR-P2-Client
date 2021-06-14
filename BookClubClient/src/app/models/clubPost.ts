@@ -1,5 +1,5 @@
 export interface clubPost {
-    Id:number,
+    id:number,
     user: string,
     BookClubID: number,
     totalLike: number,

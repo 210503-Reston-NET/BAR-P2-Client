@@ -17,7 +17,6 @@ export class BookclubService {
   constructor(private http:HttpClient) { }
 
   getBookclubs(){
-
     return this.http.get(environment.HOSTAPI+"BookClub");
 
   
@@ -44,6 +43,17 @@ export class BookclubService {
     return this.http.get<clubPost[]>(environment.HOSTAPI+"ClubPost").toPromise();
   }
   GetClubPostByBookClub(bookClubId: number): Promise<clubPost[]> {
+  
     return this.http.get<clubPost[]>(environment.HOSTAPI+"ClubPost/GetClubPostByBookClub/"+bookClubId).toPromise();
+  }
+
+  LikeClubPost(id:number,post:clubPost):Promise<clubPost>{
+    console.log("clic......clubPost..................")
+  console.log( this.http.put<clubPost>("https://localhost:44309/api/ClubPost/LikeClubPost/"+id,post).toPromise())
+    return this.http.put<clubPost>("https://localhost:44309/api/ClubPost/LikeClubPost/"+id,post).toPromise();
+  }
+  
+  DislikeClubPost(id:number,post:clubPost):Promise<clubPost>{
+    return this.http.put<clubPost>(environment.HOSTAPI+"ClubPost/DislikeClubPost/"+id,post).toPromise();
   }
 }

@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { clubPost } from 'src/app/models/clubPost';
 import { BookclubService } from 'src/app/services/bookclub.service';
 import { AuthService } from '@auth0/auth0-angular';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-clubpost',
@@ -11,7 +12,7 @@ import { AuthService } from '@auth0/auth0-angular';
 })
 export class ClubpostComponent implements OnInit {
   newpost:clubPost={
-    Id:0,
+    id:0,
     user: '',
     BookClubID: 0,
     totalLike: 0,
@@ -27,7 +28,7 @@ export class ClubpostComponent implements OnInit {
    token:boolean=true;
 
    // I use activate route to get route parameters
-  constructor(private service:BookclubService,private router:ActivatedRoute) { }
+  constructor(private service:BookclubService,private router:ActivatedRoute,private notificationService:NotificationService) { }
  
 
   ngOnInit(): void {
@@ -47,14 +48,26 @@ onSubmit():void{
   this.service.AddClubPost(this.newpost).then(result=>{});
 }
 
+
+
 doLike(clubpostId:number){
-alert("thank for your like")
-console.log("clic........................")
+  this.newpost.totalLike=1;
+  this.newpost.id=clubpostId;
+  this.service.LikeClubPost(clubpostId,this.newpost)
+  this.notificationService.showSuccess("Thanks for liking","thanks");
+
+//console.log("clic........................")
 }
 
 doDisLike(clubpostId:number){
-  alert("sorry that you don't like it")
-  console.log("clic........................")
+  this.newpost.totalDislike=1;
+  this.newpost.id=clubpostId;
+  this.service.DislikeClubPost(clubpostId,this.newpost)
+  //alert("sorry that you don't like it")
+  console.log("clic......doDisLike..................")
+  console.log(clubpostId )
+  console.log(  this.service.DislikeClubPost(clubpostId,this.newpost))
+  this.notificationService.showWarning("Expenting do better next time","sorry");
 }
 
 

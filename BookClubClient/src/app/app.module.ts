@@ -16,7 +16,9 @@ import { AuthComponent } from './components/auth/auth.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { environment } from 'src/environments/environment';
 import { FormsModule } from '@angular/forms';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+import { AddBookclubComponent } from './components/add-bookclub/add-bookclub.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +31,8 @@ import { FormsModule } from '@angular/forms';
     HeaderComponent,
     SidemenuComponent,
     AuthComponent,
-    ProfileComponent
+    ProfileComponent,
+    AddBookclubComponent
   ],
   imports: [
     BrowserModule,
@@ -40,6 +43,8 @@ import { FormsModule } from '@angular/forms';
       clientId: environment.CLIENTID
     }),
     FormsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent],
