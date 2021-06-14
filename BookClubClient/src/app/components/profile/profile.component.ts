@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 import { GoogleApiService } from '../../services/google-api.service';
 import { BookService } from '../../services/book.service';
+import { UserService } from '../../services/user.service';
 import { book, FavoriteBook, BookToRead, BooksRead } from '../../models/book';
 import { Router } from '@angular/router';
+import { userPost } from '../../models/userPost'
 
 @Component({
   selector: 'app-profile',
@@ -11,13 +13,22 @@ import { Router } from '@angular/router';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-
+  userPosts: userPost[] = [];
   booksToRead: book[] = [];
   favoriteBooks: book[] = [];
   booksRead: book[] = [];
   UserProfile: string | undefined = "";
   userEmail: string = "";
   googleBooks: any;
+
+  UPost :userPost = {
+    id: 0,
+    email: "",
+    post: "",
+    totalLike: 0,
+    totalDislike: 0
+  }
+
   bookToAdd: book = {
     id : 0,
     isbn : "",
@@ -45,7 +56,7 @@ export class ProfileComponent implements OnInit {
     pages: 0
   }
 
-  constructor(private googleApi: GoogleApiService, private bookapi: BookService, private router: Router, public auth: AuthService) { }
+  constructor(private googleApi: GoogleApiService, private bookapi: BookService, private userService: UserService,private router: Router, public auth: AuthService) { }
 
   ngOnInit(): void {
     this.auth.user$.subscribe(
@@ -54,8 +65,17 @@ export class ProfileComponent implements OnInit {
         this.bookapi.GetBooksToRead(this.userEmail).then(bk => this.booksToRead = bk);
         this.bookapi.GetBooksRead(this.userEmail).then(bk => this.booksRead = bk);
         this.bookapi.GetFavoriteBooks(this.userEmail).then(bk => this.favoriteBooks = bk);
+        this.userService.GetUserPost(this.userEmail).then(pst => this.userPosts = pst.sort((a, b) => a.id - b.id));
+        
       }
     );
+  }
+
+  MakePost(post:string){
+    this.UPost.email = this.userEmail;
+    this.UPost.post = post;
+    this.userService.MakePost(this.UPost).then(pst => console.log(pst));
+    this.router.navigate(['Profile']);
   }
 
   BookSearch(serch: string){

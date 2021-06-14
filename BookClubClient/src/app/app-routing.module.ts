@@ -4,6 +4,8 @@ import { BookComponent } from './components/book/book.component';
 import { BookclubComponent } from './components/bookclub/bookclub.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { ExploreComponent } from './components/explore/explore.component';
+import { AccountComponent } from './components/account/account.component'
 import { AuthGuard } from '@auth0/auth0-angular';
 
 const routes: Routes = [
@@ -24,6 +26,16 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
 
+  {
+    path: 'Explore',
+    component:ExploreComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'Account',
+    component:AccountComponent,
+    canActivate: [AuthGuard]
+  },
   {
     path: 'Profile',
     component:ProfileComponent,

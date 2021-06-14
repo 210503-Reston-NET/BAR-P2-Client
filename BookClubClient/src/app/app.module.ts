@@ -14,6 +14,8 @@ import { SidemenuComponent } from './components/sidemenu/sidemenu.component';
 import { AuthModule } from '@auth0/auth0-angular';
 import { AuthComponent } from './components/auth/auth.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { ExploreComponent } from './components/explore/explore.component';
+import { AccountComponent } from './components/account/account.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { ProfileComponent } from './components/profile/profile.component';
     HeaderComponent,
     SidemenuComponent,
     AuthComponent,
-    ProfileComponent
+    ProfileComponent,
+    ExploreComponent,
+    AccountComponent
   ],
   imports: [
     BrowserModule,
