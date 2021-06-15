@@ -18,6 +18,7 @@ import { ExploreComponent } from './components/explore/explore.component';
 import { AccountComponent } from './components/account/account.component';
 import { environment } from 'src/environments/environment';
 import { FormsModule } from '@angular/forms';
+import { CommentComponent } from './components/comment/comment.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { FormsModule } from '@angular/forms';
     AuthComponent,
     ProfileComponent,
     ExploreComponent,
-    AccountComponent
+    AccountComponent,
+    CommentComponent
   ],
   imports: [
     BrowserModule,
