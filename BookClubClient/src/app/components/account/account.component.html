@@ -1,13 +1,15 @@
 <div class="full-profile container transparent">
     <div class ="user-email" *ngIf="userEmail">
         <h3>User Profile</h3>
-        <h1>{{userEmail}}</h1>
+        <h1>{{accountEmail}}</h1>
     </div>
-    <div class="follow" *ngIf="isFollowing == true">
-        <button>Unfollow</button>
-    </div>
-    <div class="follow" *ngIf="isFollowing == false">
-        <button (click)="Follow()">follow</button>
+    <div class="follow-unfollow">
+        <div class="follow" *ngIf="isFollowing == true">
+            <button>Unfollow</button>
+        </div>
+        <div class="follow" *ngIf="isFollowing == false">
+            <button (click)="Follow()">follow</button>
+        </div>
     </div>
 
     <div class="container" >
