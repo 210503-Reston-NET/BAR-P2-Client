@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { user, FollowUser } from '../models/user';
 import { userPost } from '../models/userPost';
+import { comment } from '../models/comment';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -18,23 +20,30 @@ export class UserService {
   }
 
   GetUser(email:string): Promise<user>{
-    return this.http.get<user>('https://bookclubapi.azurewebsites.net/api/User/'+email).toPromise()
+    return this.http.get<user>(environment.HOSTAPI + 'User/'+email).toPromise()
   }
 
   GetUserPost(userEmail:string): Promise<userPost[]>{
-    return this.http.get<userPost[]>('https://bookclubapi.azurewebsites.net/api/UserPost/GetUserPostByUser/'+userEmail).toPromise();
+    return this.http.get<userPost[]>(environment.HOSTAPI + 'UserPost/GetUserPostByUser/'+userEmail).toPromise();
   }
 
   MakePost(post: userPost): Promise<userPost>{
-    return this.http.post<userPost>('https://bookclubapi.azurewebsites.net/api/UserPost', post).toPromise().then(pst => pst);
+    return this.http.post<userPost>(environment.HOSTAPI +'UserPost', post).toPromise().then(pst => pst);
   }
 
   IsFollower(followerEmail: string, followedEmail: string): Promise<boolean>{
-    return this.http.get<boolean>('https://bookclubapi.azurewebsites.net/api/FollowUser/GetFollowersByUser/'+followerEmail+'/'+followedEmail).toPromise();
+    return this.http.get<boolean>(environment.HOSTAPI + 'FollowUser/GetFollowersByUser/'+followerEmail+'/'+followedEmail).toPromise();
   }
 
   Follow(followerUser: FollowUser): Promise<FollowUser>{
-    return this.http.post<FollowUser>('https://bookclubapi.azurewebsites.net/api/FollowUser', followerUser).toPromise();
+    return this.http.post<FollowUser>(environment.HOSTAPI + 'FollowUser', followerUser).toPromise();
   }
 
+  GetComments(UserPostId: number): Promise<comment[]>{
+    return this.http.get<comment[]>(environment.HOSTAPI + 'Comment/GetUserPostComments/'+ UserPostId).toPromise();
+  }
+
+  GetPostById(postId: number): Promise<userPost>{
+    return this.http.get<userPost>(environment.HOSTAPI + 'UserPost/' + postId).toPromise();
+  }
 }

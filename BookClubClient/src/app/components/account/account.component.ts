@@ -52,4 +52,8 @@ export class AccountComponent implements OnInit {
     this.userService.Follow(this.followUser).then(fl => console.log(fl));
   }
 
+  GotoComments(UserPostId: number){
+    this.router.navigate(['Comments'], { queryParams: { UserPostId: UserPostId, ClubPostId: 0 } });
+  }
+
 }
