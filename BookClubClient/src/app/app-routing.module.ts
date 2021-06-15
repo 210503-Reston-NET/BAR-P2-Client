@@ -7,6 +7,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { AuthGuard } from '@auth0/auth0-angular';
 import { ClubpostComponent } from './components/clubpost/clubpost.component';
 import { ViewClubpostsComponent } from './components/view-clubposts/view-clubposts.component';
+import { AddBookclubComponent } from './components/add-bookclub/add-bookclub.component';
 
 const routes: Routes = [
   {
@@ -34,8 +35,8 @@ const routes: Routes = [
 
 
   {
-    path: 'bookclub',
-    component:BookclubComponent,
+    path: 'Addbookclub',
+    component:AddBookclubComponent,
     canActivate: [AuthGuard]
   },
   {

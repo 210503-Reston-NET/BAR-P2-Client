@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { book, FavoriteBook } from '../models/book';
+import { BookClub } from '../models/bookClub';
 import { clubPost } from '../models/clubPost';
 
 @Injectable({
@@ -24,6 +25,11 @@ export class BookclubService {
 
   getBooks(){
     return this.http.get(environment.HOSTAPI+"/Book");
+  }
+
+  AddBookClub(newBookclub:BookClub) : Promise<BookClub>{
+  
+    return this.http.post<BookClub>(environment.HOSTAPI+"BookClub", newBookclub).toPromise().then(bk => bk);
   }
 
   AddBook(newBook:book) : Promise<book>{
@@ -49,8 +55,8 @@ export class BookclubService {
 
   LikeClubPost(id:number,post:clubPost):Promise<clubPost>{
     console.log("clic......clubPost..................")
-  console.log( this.http.put<clubPost>("https://localhost:44309/api/ClubPost/LikeClubPost/"+id,post).toPromise())
-    return this.http.put<clubPost>("https://localhost:44309/api/ClubPost/LikeClubPost/"+id,post).toPromise();
+  console.log( this.http.put<clubPost>(environment.HOSTAPI+"ClubPost/LikeClubPost/"+id,post).toPromise())
+    return this.http.put<clubPost>(environment.HOSTAPI+"ClubPost/LikeClubPost/"+id,post).toPromise();
   }
   
   DislikeClubPost(id:number,post:clubPost):Promise<clubPost>{

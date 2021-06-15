@@ -1,1 +1,44 @@
-<p>add-bookclub works!</p>
+<div class="full-profile container transparent">
+    
+
+    <div>
+        <input type="search" placeholder="Search Books" #search id="search" />
+        <button (click)="BookSearch(search.value)">Search</button>
+    </div>
+
+    <div *ngIf="googleBooks" id="f">
+        <div class="container">
+
+            
+                <div class="col-md-8" *ngFor="let googleBook of googleBooks">
+                    <img src={{googleBook.volumeInfo.imageLinks.smallThumbnail}} class="card-img-top" alt="">
+                    <div class="card-body">
+                        <h5 class="card-title">{{googleBook.volumeInfo.title}}</h5>
+                        <p class="card-text">{{googleBook.volumeInfo.authors[0]}}</p>
+                        <form>
+                            <div class="col-sm-10">
+                                <textarea type="textarea" [(ngModel)]="newbookClub.description" #description="ngModel" name="description"
+                                    class="form-control form-control-sm" id="colFormLabelSm" placeholder="club details">
+                              </textarea>
+                            </div>
+                            <div *ngIf="auth.user$ | async as user">
+                                <button (click)="AddBookClub(googleBook.volumeInfo.industryIdentifiers[0].identifier, googleBook.volumeInfo.title)" class="btn btn-primary"> Save</button>
+                            </div>
+                          </form>
+                        
+                       
+                        
+                    </div>
+                
+
+
+             
+          
+            
+            
+           
+          
+        </div>
+    </div>
+   
+</div>

@@ -1,4 +1,4 @@
-export interface bookClub {
+export interface BookClub {
     name: string,
     description: string,
     ISBN: string,
