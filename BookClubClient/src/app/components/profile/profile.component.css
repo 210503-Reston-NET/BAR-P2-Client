@@ -15,3 +15,16 @@
 .table{
     width: 30%;
 }
+
+.post{
+    margin: 10px;
+    padding: 5px;
+    padding-left: 10px;
+    border: 1px;
+    background-color: rgb(238, 238, 238);;
+    box-shadow: 2px 2px 2px grey;
+}
+
+.post:hover {
+    background-color: white;
+}

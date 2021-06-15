@@ -37,10 +37,10 @@ export class AccountComponent implements OnInit {
       (profile) => {
         (this.userEmail = profile.userEmail);
         (this.accountEmail = profile.accountEmail);
-        this.bookapi.GetBooksToRead(this.userEmail).then(bk => this.booksToRead = bk).then(bk => console.log(bk));
-        this.bookapi.GetBooksRead(this.userEmail).then(bk => this.booksRead = bk).then(bk => console.log(bk));
-        this.bookapi.GetFavoriteBooks(this.userEmail).then(bk => this.favoriteBooks = bk).then(bk => console.log(bk));
-        this.userService.GetUserPost(this.userEmail).then(pst => this.userPosts = pst.sort((a, b) => a.id - b.id));
+        this.bookapi.GetBooksToRead(this.accountEmail).then(bk => this.booksToRead = bk).then(bk => console.log(bk));
+        this.bookapi.GetBooksRead(this.accountEmail).then(bk => this.booksRead = bk).then(bk => console.log(bk));
+        this.bookapi.GetFavoriteBooks(this.accountEmail).then(bk => this.favoriteBooks = bk).then(bk => console.log(bk));
+        this.userService.GetUserPost(this.accountEmail).then(pst => this.userPosts = pst.sort((a, b) => a.id - b.id));
         this.userService.IsFollower(this.userEmail, this.accountEmail).then(bl => this.isFollowing = bl);
       }
     );

@@ -20,6 +20,8 @@ export class ProfileComponent implements OnInit {
   UserProfile: string | undefined = "";
   userEmail: string = "";
   googleBooks: any;
+  numBooks: number = 0;
+  numPages: number = 0;
 
   UPost :userPost = {
     id: 0,
@@ -63,10 +65,10 @@ export class ProfileComponent implements OnInit {
       (profile) => {
         (this.userEmail = profile?.email!);
         this.bookapi.GetBooksToRead(this.userEmail).then(bk => this.booksToRead = bk);
-        this.bookapi.GetBooksRead(this.userEmail).then(bk => this.booksRead = bk);
+        this.bookapi.GetBooksRead(this.userEmail).then(bk => {this.booksRead = bk; this.numBooks = bk.length;});
         this.bookapi.GetFavoriteBooks(this.userEmail).then(bk => this.favoriteBooks = bk);
         this.userService.GetUserPost(this.userEmail).then(pst => this.userPosts = pst.sort((a, b) => a.id - b.id));
-        
+        this.userService.GetUser(this.userEmail).then(usr => this.numPages = usr.pagesRead);
       }
     );
   }
@@ -74,7 +76,7 @@ export class ProfileComponent implements OnInit {
   MakePost(post:string){
     this.UPost.email = this.userEmail;
     this.UPost.post = post;
-    this.userService.MakePost(this.UPost).then(pst => console.log(pst));
+    this.userService.MakePost(this.UPost).then(pst => {console.log(pst); window.location.reload();});
     this.router.navigate(['Profile']);
   }
 
@@ -131,4 +133,7 @@ export class ProfileComponent implements OnInit {
     this.router.navigate(['Profile'])
   }
 
+  GotoComments(UserPostId: number){
+    this.router.navigate(['Comments'], { queryParams: { UserPostId: UserPostId, ClubPostId: 0 } });
+  }
 }
