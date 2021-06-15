@@ -5,6 +5,7 @@ export interface book{
     title:string;
     author:string;
     categoryName:string;
+    imageUrl: string;
 }
 
 export interface FavoriteBook{

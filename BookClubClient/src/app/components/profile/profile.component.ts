@@ -36,7 +36,8 @@ export class ProfileComponent implements OnInit {
     isbn : "",
     title: "",
     author: "",
-    categoryName: ''
+    categoryName: '',
+    imageUrl: ''
   };
 
   favBook : FavoriteBook ={
@@ -89,19 +90,20 @@ export class ProfileComponent implements OnInit {
     })
   }
 
-  AddBookToDB(isbn: string, title:string, author:string, categoryName:string){
+  AddBookToDB(isbn: string, title:string, author:string, categoryName:string, img: string){
     this.bookToAdd.id = 0;
     this.bookToAdd.isbn = isbn;
     this.bookToAdd.title = title;
     this.bookToAdd.author = author;
     this.bookToAdd.categoryName = categoryName;
+    this.bookToAdd.imageUrl = img;
     console.log(this.bookToAdd);
 
     this.bookapi.AddBook(this.bookToAdd).then( book => console.log(book));
   }
 
-  AddBookToFavorite(isbn: string, title:string, author:string, categoryName:string, email:string | undefined){
-    this.AddBookToDB(isbn, title, author, categoryName);
+  AddBookToFavorite(isbn: string, title:string, author:string, categoryName:string, img: string, email:string | undefined){
+    this.AddBookToDB(isbn, title, author, categoryName, img);
     
     this.favBook.email = email!;
     this.favBook.isbn = isbn;
@@ -110,8 +112,8 @@ export class ProfileComponent implements OnInit {
     this.router.navigate(['Profile'])
   }
 
-  AddBookToRead(isbn: string, title:string, author:string, categoryName:string, email:string | undefined){
-    this.AddBookToDB(isbn, title, author, categoryName);
+  AddBookToRead(isbn: string, title:string, author:string, categoryName:string, img: string, email:string | undefined){
+    this.AddBookToDB(isbn, title, author, categoryName, img);
     
     this.bookToRead.email = email!;
     this.bookToRead.isbn = isbn;
@@ -120,8 +122,8 @@ export class ProfileComponent implements OnInit {
     this.router.navigate(['Profile'])
   }
 
-  AddBooksRead(isbn: string, title:string, author:string, categoryName:string, pages:number, email:string | undefined){
-    this.AddBookToDB(isbn, title, author, categoryName);
+  AddBooksRead(isbn: string, title:string, author:string, categoryName:string, pages:number, img: string, email:string | undefined){
+    this.AddBookToDB(isbn, title, author, categoryName, img);
 
     this.bookRead.user = email!;
     this.bookRead.isbn = isbn;
