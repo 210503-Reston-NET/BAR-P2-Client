@@ -4,10 +4,13 @@ import { BookComponent } from './components/book/book.component';
 import { BookclubComponent } from './components/bookclub/bookclub.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { ExploreComponent } from './components/explore/explore.component';
+import { AccountComponent } from './components/account/account.component';
 import { AuthGuard } from '@auth0/auth0-angular';
 import { ClubpostComponent } from './components/clubpost/clubpost.component';
 import { ViewClubpostsComponent } from './components/view-clubposts/view-clubposts.component';
 import { AddBookclubComponent } from './components/add-bookclub/add-bookclub.component';
+import { CommentComponent } from './components/comment/comment.component'
 
 const routes: Routes = [
   {
@@ -27,6 +30,21 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
 
+  {
+    path: 'Explore',
+    component:ExploreComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'Account',
+    component:AccountComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'Comments',
+    component:CommentComponent,
+    canActivate: [AuthGuard]
+  },
   {
     path: 'Profile',
     component:ProfileComponent,

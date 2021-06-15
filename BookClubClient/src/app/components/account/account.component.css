@@ -12,6 +12,13 @@
     align-items: center;
     text-align: center;
 }
+
+.follow-unfollow{
+    margin: auto;
+    align-items: center;
+    text-align: center;
+}
+
 .table{
     width: 30%;
 }
@@ -22,6 +29,7 @@
     padding-left: 10px;
     border: 1px;
     background-color: rgb(238, 238, 238);;
+    opacity: 1;
     box-shadow: 2px 2px 2px grey;
 }
 

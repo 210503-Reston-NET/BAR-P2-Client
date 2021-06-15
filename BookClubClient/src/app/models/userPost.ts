@@ -1,6 +1,7 @@
 export interface userPost {
+    id: number,
     email: string,
     post: string,
-    likes: number,
-    dislikes: number
+    totalLike: number,
+    totalDislike: number
 }

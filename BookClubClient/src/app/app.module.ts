@@ -14,11 +14,16 @@ import { SidemenuComponent } from './components/sidemenu/sidemenu.component';
 import { AuthModule } from '@auth0/auth0-angular';
 import { AuthComponent } from './components/auth/auth.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { ExploreComponent } from './components/explore/explore.component';
+import { AccountComponent } from './components/account/account.component';
 import { environment } from 'src/environments/environment';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { AddBookclubComponent } from './components/add-bookclub/add-bookclub.component';
+import { CommentComponent } from './components/comment/comment.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +37,11 @@ import { AddBookclubComponent } from './components/add-bookclub/add-bookclub.com
     SidemenuComponent,
     AuthComponent,
     ProfileComponent,
-    AddBookclubComponent
+    AddBookclubComponent,
+    ExploreComponent,
+    AccountComponent,
+    CommentComponent,
+
   ],
   imports: [
     BrowserModule,
