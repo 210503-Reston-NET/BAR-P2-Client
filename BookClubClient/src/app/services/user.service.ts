@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { user, FollowUser } from '../models/user';
 import { userPost } from '../models/userPost';
-import { comment } from '../models/comment';
+import { UserComment } from '../models/comment';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -39,8 +39,8 @@ export class UserService {
     return this.http.post<FollowUser>(environment.HOSTAPI + 'FollowUser', followerUser).toPromise();
   }
 
-  GetComments(UserPostId: number): Promise<comment[]>{
-    return this.http.get<comment[]>(environment.HOSTAPI + 'Comment/GetUserPostComments/'+ UserPostId).toPromise();
+  GetComments(UserPostId: number): Promise<UserComment[]>{
+    return this.http.get<UserComment[]>(environment.HOSTAPI + 'Comment/GetUserPostComments/'+ UserPostId).toPromise();
   }
 
   GetPostById(postId: number): Promise<userPost>{
