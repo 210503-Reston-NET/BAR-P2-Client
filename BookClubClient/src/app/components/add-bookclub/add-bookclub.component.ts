@@ -31,6 +31,8 @@ googleBooks: any;
       console.log(data);
       this.googleBooks = data.items;
     })
+
+    //this.Bookload();
   }
 
   AddBookClub(isbn: string, name:string){
@@ -49,5 +51,8 @@ googleBooks: any;
     this.googleBooks = null;
     this.router.navigate(['bookclubs'])
   }
+
+
+  
 
 }
