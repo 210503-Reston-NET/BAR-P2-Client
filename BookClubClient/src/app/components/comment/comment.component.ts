@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { comment } from '../../models/comment'
+import { ClubComment, UserComment } from '../../models/comment'
 import { UserService } from '../../services/user.service'
 import { ActivatedRoute, Router } from '@angular/router';
 import { userPost } from '../../models/userPost';
 import { CommentService } from '../../services/comment.service';
 import { AuthService } from '@auth0/auth0-angular';
+import { BookclubService } from '../../services/bookclub.service'
+import { clubPost } from '../../models/clubPost'
 
 @Component({
   selector: 'app-comment',
@@ -12,8 +14,9 @@ import { AuthService } from '@auth0/auth0-angular';
   styleUrls: ['./comment.component.css']
 })
 export class CommentComponent implements OnInit {
-
-  comments: comment[] = [];
+  IsUserPost: boolean = true;
+  userComments: UserComment[] = [];
+  clubComments: ClubComment[] = [];
   UPost: userPost = {
     userPostId: 0,
     userEmail: "",
@@ -24,13 +27,20 @@ export class CommentComponent implements OnInit {
     date: "2021-06-15T23:25:22.125"
   }
 
-  comment: comment ={
-    commentId: 0,
+  uComment: UserComment ={
+    userCommentId: 0,
     userEmail: "",
     user: null,
     userPostId: 0,
     userPost: null,
-    clubPostId: 0,
+    message: ""
+  }
+
+  cComment: ClubComment ={
+    clubCommentId: 0,
+    userEmail: "",
+    user: null,
+    clubPostID: 0,
     clubPost: null,
     message: ""
   }
@@ -38,26 +48,38 @@ export class CommentComponent implements OnInit {
   userPostId: number = 0;
   ClubPostId: number = 0;
 
-  constructor(private commentService: CommentService, private userService: UserService, private route: ActivatedRoute, private router: Router, public auth: AuthService) { }
+  constructor(private bookClubapi: BookclubService, private commentService: CommentService, private userService: UserService, private route: ActivatedRoute, private router: Router, public auth: AuthService) { }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(
       params => {
-        this.auth.user$.subscribe(act => this.comment.userEmail = act?.email!);
-        this.comment.clubPostId = params.ClubPostId;
-        this.comment.userPostId = params.UserPostId;
+        this.auth.user$.subscribe(act => {
+          this.uComment.userEmail = act?.email!;
+          this.cComment.userEmail = act?.email!;
+        });
         this.userPostId = params.UserPostId;
         this.ClubPostId = params.ClubPostId;
         if (this.ClubPostId < 1){
-          this.userService.GetComments(params.UserPostId).then(cm => this.comments = cm);
-          this.userService.GetPostById(this.userPostId).then(pst => this.UPost = pst);
+          this.IsUserPost = true;
+          this.uComment.userPostId = params.UserPostId;
+          this.commentService.GetUserComment(params.UserPostId).then(cmts => this.userComments = cmts);
+          this.userService.GetPostById(params.UserPostId).then(pst => this.UPost = pst);
+        }
+        else{
+          this.IsUserPost = false;
+          this.commentService.GetClubComment(params.ClubPostId).then(cmts => this.clubComments = cmts);
         }
       }
     )
   }
 
   onSubmit(): void {
-    this.commentService.AddComment(this.comment).then(cmt => console.log(cmt));
+    if (this.IsUserPost){
+      console.log(this.uComment);
+      this.commentService.AddUserComment(this.uComment).then(cmt => console.log(cmt));
+      this.commentService.GetUserComment(this.userPostId).then(cmts => this.userComments = cmts);
+    }
+
   }
 
 }

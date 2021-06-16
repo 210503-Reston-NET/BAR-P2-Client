@@ -1,10 +1,17 @@
-export interface comment {
-    commentId: number,
+export interface UserComment {
+    userCommentId: number,
     userEmail: string,
     user: null,
     userPostId: number,
     userPost: null,
-    clubPostId: number,
+    message: string
+}
+
+export interface ClubComment {
+    clubCommentId: number,
+    userEmail: string,
+    user: null,
+    clubPostID: number,
     clubPost: null,
     message: string
 }
