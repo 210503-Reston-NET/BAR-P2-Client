@@ -46,6 +46,8 @@ export class AddBookclubComponent implements OnInit {
     this.googleApi.SearchGoogleBookByISBN(this.selected).subscribe((data: any) => {
       this.googleBooks = data.items;
     })
+    
+  
 
     this.newbookClub.name = this.googleBooks[0].volumeInfo.title;
     this.newbookClub.ISBN = this.selected;
@@ -65,6 +67,7 @@ export class AddBookclubComponent implements OnInit {
 
     this.router.navigate(['bookclubs'])
   }
+
 
   showBookSelected(selectedItemValue?: string) {
     let isbn = this.selected
