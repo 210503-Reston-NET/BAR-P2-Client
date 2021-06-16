@@ -1,26 +1,25 @@
 <div class="container">
-  <div class="row"><button class="btn btn-primary" id="add-bookclube" routerLink="/Addbookclub">Add bookclub</button></div>
-  <br/>
-  <ul *ngFor="let b of bookclubs">
-    <div class="card" style="width: 80rem;">
-      <img src="..." class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">
-          <li>{{b.name}}</li>
-        </h5>
-        <p class="card-text">
-          <li>{{b.description}}</li>
-        </p>
-        <span hidden id="bookClubId">{{b.Id}}</span>
-        <h5 class="card-title"><span><span>Like: {{b.totalLike}}</span> | <span>Dislike:{{b.totalDislike}}</span></span>
-        </h5>
 
-        <div class="card-body">
-          <a [routerLink]="['/AddClubPost', b.id,b.name]" class="card-link">new post</a> &nbsp;&nbsp;&nbsp;
-          <a [routerLink]="['/Viewclubpost', b.id,b.name]" class="card-link">view post</a> &nbsp;&nbsp;&nbsp;
-        </div>
-      </div>
-    </div>
-  </ul>
+
+
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Title</th>
+      <th scope="col">Description</th>
+      <th scope="col">Author</th>
+      <th>Options</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let b of bookclubs">
+      <th scope="row">{{b.name}}</th>
+      <td>{{b.description}}</td>
+      <td>{{b.email}}</td>
+      <td><a [routerLink]="['/ClubPostDetails', b.id,b.name]" class="btn btn-primary">details</a></td>
+    </tr>
+   
+  </tbody>
+</table>
 
 </div>

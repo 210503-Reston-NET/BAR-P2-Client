@@ -1,6 +1,7 @@
 export const environment = {
   production: true,
-  HOSTAPI:'https://bookclubapi.azurewebsites.net/api/',
+  HOSTAPI: 'https://bookclubapi.azurewebsites.net/api/',
   DOMAIN: 'dev-x71beo2n.us.auth0.com',
   CLIENTID: 'azfH6PT1l2ys746UeGZ9aOOasSAFqQfW',
+  GOOGLEAPI: ' https://www.googleapis.com/books/v1/',
 };

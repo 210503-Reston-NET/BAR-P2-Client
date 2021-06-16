@@ -1,12 +1,13 @@
 export interface user {
-    email: string,
+    userEmail: string,
     password: string,
     address: string,
     pagesRead: number
 }
 
 export interface FollowUser {
-    id: number,
+    followUserId: number,
     followerEmail: string,
-    followedEmail: string
+    userEmail: string,
+    user: null
 }

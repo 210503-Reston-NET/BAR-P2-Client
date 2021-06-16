@@ -11,78 +11,100 @@ import { ClubpostComponent } from './components/clubpost/clubpost.component';
 import { ViewClubpostsComponent } from './components/view-clubposts/view-clubposts.component';
 import { AddBookclubComponent } from './components/add-bookclub/add-bookclub.component';
 import { CommentComponent } from './components/comment/comment.component'
+import { ClubpostcommentComponent } from './components/clubpostcomment/clubpostcomment.component';
+import { BookclubdetailsComponent } from './components/bookclubdetails/bookclubdetails.component';
 
 const routes: Routes = [
   {
     path: '',
-    component:WelcomeComponent,
+    component: WelcomeComponent,
   },
 
   {
     path: 'books',
-    component:BookComponent,
+    component: BookComponent,
     canActivate: [AuthGuard]
   },
 
   {
     path: 'bookclubs',
-    component:BookclubComponent,
+    component: BookclubComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'ClubPostDetails/:clubId/:title',
+    component: BookclubComponent,
     canActivate: [AuthGuard]
   },
 
+
+
   {
     path: 'Explore',
-    component:ExploreComponent,
+    component: ExploreComponent,
     canActivate: [AuthGuard]
   },
   {
     path: 'Account',
-    component:AccountComponent,
+    component: AccountComponent,
     canActivate: [AuthGuard]
   },
   {
     path: 'Comments',
-    component:CommentComponent,
+    component: CommentComponent,
     canActivate: [AuthGuard]
   },
   {
     path: 'Profile',
-    component:ProfileComponent,
+    component: ProfileComponent,
     canActivate: [AuthGuard]
   },
 
 
   {
     path: 'Addbookclub',
-    component:AddBookclubComponent,
+    component: AddBookclubComponent,
     canActivate: [AuthGuard]
   },
   {
     path: 'clubpost',
-    component:BookclubComponent,
+    component: BookclubComponent,
     canActivate: [AuthGuard]
   },
   {
     path: 'Viewclubpost/:clubId/:BookClubTitle',
-    component:ViewClubpostsComponent,
+    component: ViewClubpostsComponent,
     canActivate: [AuthGuard]
   },
   {
     path: 'AddClubPost/:clubId/:BookClubTitle',
-    component:ClubpostComponent,
+    component: ClubpostComponent,
     canActivate: [AuthGuard]
   },
   {
     path: 'AddClubPost/:clubId/:BookClubTitle',
-    component:ClubpostComponent,
+    component: ClubpostComponent,
     canActivate: [AuthGuard]
   },
 
   {
     path: 'ClubPosts/:clubId',
-    component:ClubpostComponent,
+    component: ClubpostComponent,
     canActivate: [AuthGuard]
-  }
+  },
+  {
+    path: 'clubpostcomment',
+    component: ClubpostcommentComponent,
+    canActivate: [AuthGuard]
+
+  },
+  {
+    path: 'bookclubdetail',
+    component: BookclubdetailsComponent,
+    canActivate: [AuthGuard]
+
+  },
+
 ];
 
 @NgModule({

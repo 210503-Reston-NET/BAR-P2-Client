@@ -10,7 +10,9 @@
   },
   "styles": [
     "node_modules/ngx-toastr/toastr.css",
-    "src/styles.css"
+    "src/styles.css",
+    "node_modules/datatables.net-dt/css/jquery.dataTables.css",
+    "node_modules/bootstrap/dist/css/bootstrap.min.css"
   ],
   "private": true,
   "dependencies": {
@@ -23,9 +25,14 @@
     "@angular/platform-browser-dynamic": "~12.0.3",
     "@angular/router": "~12.0.3",
     "@auth0/auth0-angular": "^1.5.1",
+
     "datatables.net": "^1.10.25",
     "datatables.net-dt": "^1.10.25",
     "jquery": "^3.6.0",
+    "angular-datatables": "^12.0.0",
+    "bootstrap": "^5.0.1",
+    "datatables.net": "^1.10.25",
+    "datatables.net-dt": "^1.10.25",
     "ngx-toastr": "^14.0.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.1.0",
@@ -35,7 +42,9 @@
     "@angular-devkit/build-angular": "~12.0.3",
     "@angular/cli": "~12.0.3",
     "@angular/compiler-cli": "~12.0.3",
+    "@types/datatables.net": "^1.10.19",
     "@types/jasmine": "~3.6.0",
+    "@types/jquery": "^3.5.5",
     "@types/node": "^12.11.1",
     "jasmine-core": "~3.7.0",
     "karma": "~6.3.0",

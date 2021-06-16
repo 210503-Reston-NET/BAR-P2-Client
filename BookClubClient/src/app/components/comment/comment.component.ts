@@ -15,18 +15,23 @@ export class CommentComponent implements OnInit {
 
   comments: comment[] = [];
   UPost: userPost = {
-    id: 0,
-    email: "",
+    userPostId: 0,
+    userEmail: "",
+    user: null,
     post: "",
     totalLike: 0,
-    totalDislike: 0
+    totalDislike: 0,
+    date: "2021-06-15T23:25:22.125"
   }
 
   comment: comment ={
-    id: 0,
-    email: "",
+    commentId: 0,
+    userEmail: "",
+    user: null,
     userPostId: 0,
+    userPost: null,
     clubPostId: 0,
+    clubPost: null,
     message: ""
   }
 
@@ -38,7 +43,7 @@ export class CommentComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParams.subscribe(
       params => {
-        this.auth.user$.subscribe(act => this.comment.email = act?.email!);
+        this.auth.user$.subscribe(act => this.comment.userEmail = act?.email!);
         this.comment.clubPostId = params.ClubPostId;
         this.comment.userPostId = params.UserPostId;
         this.userPostId = params.UserPostId;
