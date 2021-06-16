@@ -1,7 +1,7 @@
 <div class="container">
 
 
-
+<div id="addclubId"><li><a routerLink="[Addbookclub]" class="btn btn-success">Add new club</a></li></div>
 <table class="table">
   <thead class="thead-dark">
     <tr>
@@ -14,9 +14,13 @@
   <tbody>
     <tr *ngFor="let b of bookclubs">
       <th scope="row">{{b.name}}</th>
+      <td hidden>{{b.bookClubId}}</td>
       <td>{{b.description}}</td>
       <td>{{b.email}}</td>
-      <td><a [routerLink]="['/ClubPostDetails', b.id,b.name]" class="btn btn-primary">details</a></td>
+      <td>
+    
+      <a  class="btn btn-primary"  ><i class="fas fa-thumbs-down" id="selectionid" (click)="ViewClubdetails(b.bookClubId,b.name)"></i></a>
+    </td>
     </tr>
    
   </tbody>

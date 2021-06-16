@@ -28,5 +28,9 @@ export class BookclubComponent implements OnInit {
       )
   }
 
+  ViewClubdetails(id:number, title:string){
+    return this.router.navigate(['bookclubdetail'],{ queryParams: { "clubId": id,"BookClubTitle":title } });
+  }
+
 
 }
