@@ -22,6 +22,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { AddBookclubComponent } from './components/add-bookclub/add-bookclub.component';
 import { CommentComponent } from './components/comment/comment.component';
+import { ClubpostcommentComponent } from './components/clubpostcomment/clubpostcomment.component';
+import { DataTablesModule } from 'angular-datatables';
+import { BookclubdetailsComponent } from './components/bookclubdetails/bookclubdetails.component';
 
 
 @NgModule({
@@ -41,6 +44,8 @@ import { CommentComponent } from './components/comment/comment.component';
     ExploreComponent,
     AccountComponent,
     CommentComponent,
+    ClubpostcommentComponent,
+    BookclubdetailsComponent,
 
   ],
   imports: [
@@ -54,9 +59,10 @@ import { CommentComponent } from './components/comment/comment.component';
     FormsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
+    DataTablesModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
-  
+
 })
 export class AppModule { }
