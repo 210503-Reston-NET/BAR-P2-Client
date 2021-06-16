@@ -1,7 +1,10 @@
 export interface comment {
-    id: number,
-    email: string,
+    commentId: number,
+    userEmail: string,
+    user: null,
     userPostId: number,
+    userPost: null,
     clubPostId: number,
+    clubPost: null,
     message: string
 }

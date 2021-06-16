@@ -1,7 +1,7 @@
 <div class="full-profile container transparent">
     <div class ="user-email" *ngIf="auth.user$ | async as user">
         <h3>User Profile</h3>
-        <h1>{{user.email}}</h1>
+        <h1>{{userEmail}}</h1>
         <p>{{numBooks}} Books Read For a total of {{numPages}} pages</p>
     </div>
 
@@ -18,9 +18,9 @@
                     <h5 class="card-title">{{googleBook.volumeInfo.title}}</h5>
                     <p class="card-text">{{googleBook.volumeInfo.authors[0]}}</p>
                     <div *ngIf="auth.user$ | async as user">
-                        <button (click)="AddBookToFavorite(googleBook.volumeInfo.industryIdentifiers[0].identifier, googleBook.volumeInfo.title, googleBook.volumeInfo.authors[0], googleBook.volumeInfo.categories[0], googleBook.volumeInfo.imageLinks.thumbnail, user.email)">add to Favorite</button>
-                        <button (click)="AddBookToRead(googleBook.volumeInfo.industryIdentifiers[0].identifier, googleBook.volumeInfo.title, googleBook.volumeInfo.authors[0], googleBook.volumeInfo.categories[0], googleBook.volumeInfo.imageLinks.thumbnail, user.email)">add to reading list</button>
-                        <button (click)="AddBooksRead(googleBook.volumeInfo.industryIdentifiers[0].identifier, googleBook.volumeInfo.title, googleBook.volumeInfo.authors[0], googleBook.volumeInfo.categories[0], googleBook.volumeInfo.pageCount, googleBook.volumeInfo.imageLinks.thumbnail, user.email)">already read </button>
+                        <button (click)="AddBookToFavorite(googleBook.volumeInfo.industryIdentifiers[0].identifier, googleBook.volumeInfo.title, googleBook.volumeInfo.authors[0], googleBook.volumeInfo.categories[0], googleBook.volumeInfo.imageLinks.thumbnail, user.userEmail)">add to Favorite</button>
+                        <button (click)="AddBookToRead(googleBook.volumeInfo.industryIdentifiers[0].identifier, googleBook.volumeInfo.title, googleBook.volumeInfo.authors[0], googleBook.volumeInfo.categories[0], googleBook.volumeInfo.imageLinks.thumbnail, user.userEmail)">add to reading list</button>
+                        <button (click)="AddBooksRead(googleBook.volumeInfo.industryIdentifiers[0].identifier, googleBook.volumeInfo.title, googleBook.volumeInfo.authors[0], googleBook.volumeInfo.categories[0], googleBook.volumeInfo.pageCount, googleBook.volumeInfo.imageLinks.thumbnail, user.userEmail)">already read </button>
                     </div>
                     
                 </div>
@@ -85,8 +85,8 @@
         </div>
         <div *ngIf="userPosts" id="f">
             <div class="post" *ngFor="let userPost of userPosts">
-                <h6>{{userPost.email}}</h6>
-                <p (click) ="GotoComments(userPost.id)">{{userPost.post}}</p>
+                <h6>{{userPost.userEmail}}</h6>
+                <p (click) ="GotoComments(userPost.userPostId)">{{userPost.post}}</p>
                 <p>{{userPost.totalLike}} Likes | {{userPost.totalDislike}} Dislikes</p>
             </div>
         </div>

@@ -13,7 +13,7 @@ import { AuthService } from '@auth0/auth0-angular';
 export class ExploreComponent implements OnInit {
 
   userFound: user = {
-    email: "",
+    userEmail: "",
     password: "",
     address: "",
     pagesRead: 0

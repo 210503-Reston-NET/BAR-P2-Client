@@ -1,28 +1,34 @@
 
 export interface book{
-    id: number;
     isbn:string;
     title:string;
     author:string;
-    categoryName:string;
+    categoryId:string;
+    category: null;
     imageUrl: string;
 }
 
 export interface FavoriteBook{
-    id: number,
-    email: string,
-    isbn: string
+    favoriteBookId: number,
+    userEmail: string,
+    user: null,
+    isbn: string,
+    book: null
 }
 
 export interface BookToRead{
-    id: number,
-    email: string,
-    isbn: string
+    booksToReadId: number,
+    userEmail: string,
+    user: null,
+    isbn: string,
+    book: null,
 }
 
 export interface BooksRead{
-    id: number,
-    user: string,
+    booksReadId: number,
+    userEmail: string;
+    user: null,
     isbn: string,
-    pages: number
+    book: null,
+    bookPages: number
 }
