@@ -76,8 +76,10 @@ export class CommentComponent implements OnInit {
   onSubmit(): void {
     if (this.IsUserPost){
       console.log(this.uComment);
-      this.commentService.AddUserComment(this.uComment).then(cmt => console.log(cmt));
-      this.commentService.GetUserComment(this.userPostId).then(cmts => this.userComments = cmts);
+      this.commentService.AddUserComment(this.uComment).then(cmt => {
+        console.log(cmt);
+        this.commentService.GetUserComment(this.userPostId).then(cmts => this.userComments = cmts);
+      });
     }
 
   }
