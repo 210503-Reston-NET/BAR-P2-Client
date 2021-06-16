@@ -67,8 +67,8 @@
         
         <div *ngIf="userPosts" id="f">
             <div class="post" *ngFor="let userPost of userPosts">
-                <h6>{{userPost.email}}</h6>
-                <p (click) ="GotoComments(userPost.id)">{{userPost.post}}</p>
+                <h6>{{userPost.userEmail}}</h6>
+                <p (click) ="GotoComments(userPost.userPostId)">{{userPost.post}}</p>
                 <p>{{userPost.totalLike}} Likes | {{userPost.totalDislike}} Dislikes</p>
             </div>
         </div>

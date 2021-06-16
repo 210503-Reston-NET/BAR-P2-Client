@@ -25,9 +25,10 @@ export class AccountComponent implements OnInit {
   isFollowing: boolean = true;
   
   followUser: FollowUser = {
-    id: 0,
+    followUserId: 0,
     followerEmail: "",
-    followedEmail: ""
+    userEmail: "",
+    user: null
   }
 
   constructor(private googleApi: GoogleApiService, private bookapi: BookService, private userService: UserService, private route: ActivatedRoute, private router: Router, public auth: AuthService) { }
@@ -40,7 +41,7 @@ export class AccountComponent implements OnInit {
         this.bookapi.GetBooksToRead(this.accountEmail).then(bk => this.booksToRead = bk).then(bk => console.log(bk));
         this.bookapi.GetBooksRead(this.accountEmail).then(bk => this.booksRead = bk).then(bk => console.log(bk));
         this.bookapi.GetFavoriteBooks(this.accountEmail).then(bk => this.favoriteBooks = bk).then(bk => console.log(bk));
-        this.userService.GetUserPost(this.accountEmail).then(pst => this.userPosts = pst.sort((a, b) => a.id - b.id));
+        this.userService.GetUserPost(this.accountEmail).then(pst => this.userPosts = pst);
         this.userService.IsFollower(this.userEmail, this.accountEmail).then(bl => this.isFollowing = bl);
       }
     );
@@ -48,7 +49,7 @@ export class AccountComponent implements OnInit {
 
   Follow(){
     this.followUser.followerEmail = this.userEmail;
-    this.followUser.followedEmail = this.accountEmail;
+    this.followUser.userEmail = this.accountEmail;
     this.userService.Follow(this.followUser).then(fl => console.log(fl));
   }
 

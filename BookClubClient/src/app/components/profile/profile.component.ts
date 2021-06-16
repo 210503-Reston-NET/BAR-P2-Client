@@ -24,38 +24,47 @@ export class ProfileComponent implements OnInit {
   numPages: number = 0;
 
   UPost :userPost = {
-    id: 0,
-    email: "",
+    userPostId: 0,
+    userEmail: "",
+    user: null,
     post: "",
     totalLike: 0,
-    totalDislike: 0
+    totalDislike: 0,
+    date: "2021-06-15T23:25:22.125"
   }
 
   bookToAdd: book = {
-    id : 0,
     isbn : "",
     title: "",
     author: "",
-    categoryName: ''
+    categoryId: '',
+    category: null,
+    imageUrl: ''
   };
 
   favBook : FavoriteBook ={
-    id :0,
-    email: "",
-    isbn: ""
+    favoriteBookId :0,
+    userEmail: "",
+    user: null,
+    isbn: "",
+    book: null,
   }
 
   bookToRead : BookToRead ={
-    id :0,
-    email: "",
-    isbn: ""
+    booksToReadId :0,
+    userEmail: "",
+    user: null,
+    isbn: "",
+    book: null,
   }
 
   bookRead : BooksRead = {
-    id :0,
-    user: "",
+    booksReadId :0,
+    userEmail: "",
+    user: null,
     isbn: "",
-    pages: 0
+    book: null,
+    bookPages: 0
   }
 
   constructor(private googleApi: GoogleApiService, private bookapi: BookService, private userService: UserService,private router: Router, public auth: AuthService) { }
@@ -66,17 +75,21 @@ export class ProfileComponent implements OnInit {
         (this.userEmail = profile?.email!);
         this.bookapi.GetBooksToRead(this.userEmail).then(bk => this.booksToRead = bk);
         this.bookapi.GetBooksRead(this.userEmail).then(bk => {this.booksRead = bk; this.numBooks = bk.length;});
-        this.bookapi.GetFavoriteBooks(this.userEmail).then(bk => this.favoriteBooks = bk);
-        this.userService.GetUserPost(this.userEmail).then(pst => this.userPosts = pst.sort((a, b) => a.id - b.id));
+        this.bookapi.GetFavoriteBooks(this.userEmail).then(bk => {this.favoriteBooks = bk; console.log(bk)});
+        this.userService.GetUserPost(this.userEmail).then(pst =>{this.userPosts = pst; console.log(pst)});
         this.userService.GetUser(this.userEmail).then(usr => this.numPages = usr.pagesRead);
       }
     );
   }
 
   MakePost(post:string){
-    this.UPost.email = this.userEmail;
+    this.UPost.userEmail = this.userEmail;
     this.UPost.post = post;
-    this.userService.MakePost(this.UPost).then(pst => {console.log(pst); window.location.reload();});
+    console.log(this.UPost);
+    this.userService.MakePost(this.UPost).then(pst => {
+      console.log(pst);
+      this.userService.GetUserPost(this.userEmail).then(pst => this.userPosts = pst)
+    });
     this.router.navigate(['Profile']);
   }
 
@@ -89,46 +102,62 @@ export class ProfileComponent implements OnInit {
     })
   }
 
-  AddBookToDB(isbn: string, title:string, author:string, categoryName:string){
-    this.bookToAdd.id = 0;
+  AddBookToDB(isbn: string, title:string, author:string, categoryName:string, img: string){
     this.bookToAdd.isbn = isbn;
     this.bookToAdd.title = title;
     this.bookToAdd.author = author;
-    this.bookToAdd.categoryName = categoryName;
+    this.bookToAdd.categoryId = categoryName;
+    this.bookToAdd.imageUrl = img;
+    console.log("adding book");
     console.log(this.bookToAdd);
 
-    this.bookapi.AddBook(this.bookToAdd).then( book => console.log(book));
+    this.bookapi.AddBook(this.bookToAdd).then( book => {console.log("return"); console.log(book);});
   }
 
-  AddBookToFavorite(isbn: string, title:string, author:string, categoryName:string, email:string | undefined){
-    this.AddBookToDB(isbn, title, author, categoryName);
+  AddBookToFavorite(isbn: string, title:string, author:string, categoryName:string, img: string, email:string | undefined){
+    this.AddBookToDB(isbn, title, author, categoryName, img);
     
-    this.favBook.email = email!;
+    this.favBook.userEmail = this.userEmail;
     this.favBook.isbn = isbn;
-    this.bookapi.AddFavoriteBooK(this.favBook).then(bk => console.log(bk));
+    this.bookapi.AddFavoriteBooK(this.favBook).then(bk => {
+      console.log(bk);
+      this.bookapi.GetFavoriteBooks(this.userEmail).then(bk => this.favoriteBooks = bk);
+    });
     this.googleBooks = null;
     this.router.navigate(['Profile'])
   }
 
-  AddBookToRead(isbn: string, title:string, author:string, categoryName:string, email:string | undefined){
-    this.AddBookToDB(isbn, title, author, categoryName);
+  AddBookToRead(isbn: string, title:string, author:string, categoryName:string, img: string, email:string | undefined){
+    this.AddBookToDB(isbn, title, author, categoryName, img);
     
-    this.bookToRead.email = email!;
+    this.bookToRead.userEmail = this.userEmail;
     this.bookToRead.isbn = isbn;
-    this.bookapi.AddBooKToRead(this.bookToRead).then(bk => console.log(bk));
+    this.bookapi.AddBooKToRead(this.bookToRead).then(bk => {
+      console.log(bk);
+      this.bookapi.GetBooksToRead(this.userEmail).then(bk => this.booksToRead = bk);
+    });
     this.googleBooks = null;
     this.router.navigate(['Profile'])
   }
 
-  AddBooksRead(isbn: string, title:string, author:string, categoryName:string, pages:number, email:string | undefined){
-    this.AddBookToDB(isbn, title, author, categoryName);
+  AddBooksRead(isbn: string, title:string, author:string, categoryName:string, pages:number, img: string, email:string | undefined){
+    this.AddBookToDB(isbn, title, author, categoryName, img);
+    this.bookToAdd.isbn = isbn;
+    this.bookToAdd.title = title;
+    this.bookToAdd.author = author;
+    this.bookToAdd.categoryId = categoryName;
+    this.bookToAdd.imageUrl = img;
 
-    this.bookRead.user = email!;
+    this.bookRead.userEmail = this.userEmail;
     this.bookRead.isbn = isbn;
-    this.bookRead.pages = pages!;
+    this.bookRead.bookPages = pages!;
     console.log("in profile component " + email);
     console.log(this.booksRead);
-    this.bookapi.AddBooksRead(this.bookRead).then(bk => console.log(bk));
+    
+    this.bookapi.AddBooksRead(this.bookRead).then(bk => {
+      console.log(bk);
+      this.bookapi.GetBooksRead(this.userEmail).then(bk => {this.booksRead = bk; this.numBooks = bk.length;});
+    });
     this.googleBooks = null;
     this.router.navigate(['Profile'])
   }

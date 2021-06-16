@@ -23,8 +23,9 @@ export class BookService {
 
 
   AddBook(newBook:book) : Promise<book>{
+    console.log("in service");
     console.log(newBook);
-    return this.http.post<book>(this.host, newBook).toPromise().then(bk => bk);
+    return this.http.post<book>(environment.HOSTAPI +'Book', newBook).toPromise().then(bk => bk);
   }
 
   AddFavoriteBooK(favBook:FavoriteBook) : Promise<FavoriteBook>{
@@ -52,7 +53,7 @@ export class BookService {
   }
 
   GetFavoriteBooks(email:string): Promise<book[]>{
-    return this.http.get<book[]>(environment.HOSTAPI+'/FavoriteBook/'+ email).toPromise();
+    return this.http.get<book[]>(environment.HOSTAPI+'FavoriteBook/'+ email).toPromise();
   }
   /*getBooks():Promise<book[]>{
     return this.http.get<book[]>(this.host).toPromise();

@@ -1,6 +1,6 @@
 <div class="full-comment">
     <div class="post" *ngIf="UPost">
-        <h5>{{UPost.email}}</h5>
+        <h5>{{UPost.userEmail}}</h5>
         <p>{{UPost.post}}</p>
     </div>
 
@@ -17,7 +17,7 @@
 
     <div class="comments">
         <div class="comment" *ngFor ="let comment of comments">
-            <h6>{{comment.email}}</h6>
+            <h6>{{comment.userEmail}}</h6>
             <p>{{comment.message}}</p>
         </div>
     </div>
