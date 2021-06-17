@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { userFeed } from '../../models/userFeed';
-import { userPost } from '../../models/userPost';
+import { userPost, userPostLike } from '../../models/userPost';
 import { UserService } from '../../services/user.service';
 import { AuthService } from '@auth0/auth0-angular';
 import { Router } from '@angular/router';
+import {clubPostLike} from '../../models/clubPost';
+import { ClubpostService } from '../../services/clubpost.service'
 
 @Component({
   selector: 'app-user-feed',
@@ -24,7 +26,27 @@ export class UserFeedComponent implements OnInit {
     date: "2021-06-15T23:25:22.125"
   }
 
-  constructor(private userService: UserService,private router: Router, public auth: AuthService) { }
+  Ulike: userPostLike = {
+    userPostLikesId: 0,
+    like: false,
+    dislike: false,
+    userPostId: 0,
+    userPost: null,
+    userEmail: "",
+    user: null
+  }
+
+  Clike: clubPostLike = {
+    clubPostLikesId: 0,
+    like: false,
+    dislike: false,
+    clubPostId: 0,
+    clubPost: null,
+    userEmail: "",
+    user: null
+  }
+  
+  constructor(private userService: UserService, private clubPostService: ClubpostService , private router: Router, public auth: AuthService) { }
 
   ngOnInit(): void {
     this.auth.user$.subscribe(
@@ -52,7 +74,87 @@ export class UserFeedComponent implements OnInit {
           console.log(fd);
         })
     });
-    
   }
 
+  Like(userPostId: number, clubPostId: number)
+  {
+    if (clubPostId < 1)
+    {
+      this.Ulike.userPostId = userPostId;
+      this.Ulike.userEmail = this.userEmail;
+      this.Ulike.like = true;
+      this.Ulike.dislike = false;
+      console.log(this.Ulike);
+      this.userService.LikeDislike(this.Ulike).then(lk => 
+        {
+          console.log(lk);
+          this.userService.GetUserFeed(this.userEmail).then(fd => 
+            {
+              this.feed = fd;
+              console.log(this.userEmail);
+              console.log(fd);
+            });
+        });
+    }
+    else
+    {
+      this.Clike.clubPostId = clubPostId;
+      this.Clike.userEmail = this.userEmail;
+      this.Clike.like = true;
+      this.Clike.dislike = false;
+      console.log(this.Clike);
+      this.clubPostService.LikeDislike(this.Clike).then(lk => 
+        {
+          console.log(lk);
+          this.userService.GetUserFeed(this.userEmail).then(fd => 
+            {
+              this.feed = fd;
+              console.log(this.userEmail);
+              console.log(fd);
+            });
+        });
+    }
+
+  }
+
+  Dislike(userPostId: number, clubPostId: number)
+  {
+    if (clubPostId < 1)
+    {
+      this.Ulike.userPostId = userPostId;
+      this.Ulike.userEmail = this.userEmail;
+      this.Ulike.like = false;
+      this.Ulike.dislike = true;
+      console.log(this.Ulike);
+      this.userService.LikeDislike(this.Ulike).then(lk => 
+        {
+          console.log(lk);
+          this.userService.GetUserFeed(this.userEmail).then(fd => 
+            {
+              this.feed = fd;
+              console.log(this.userEmail);
+              console.log(fd);
+            });
+        });
+    }
+    else
+    {
+      this.Clike.clubPostId = clubPostId;
+      this.Clike.userEmail = this.userEmail;
+      this.Clike.like = false;
+      this.Clike.dislike = true;
+      console.log(this.Clike);
+      this.clubPostService.LikeDislike(this.Clike).then(lk => 
+        {
+          console.log(lk);
+          this.userService.GetUserFeed(this.userEmail).then(fd => 
+            {
+              this.feed = fd;
+              console.log(this.userEmail);
+              console.log(fd);
+            });
+        });
+    }
+
+  }
 }

@@ -92,6 +92,10 @@
                 <h6>{{userPost.userEmail}}</h6>
                 <p (click) ="GotoComments(userPost.userPostId)">{{userPost.post}}</p>
                 <p>{{userPost.totalLike}} Likes | {{userPost.totalDislike}} Dislikes</p>
+                <p>
+                    <i (click)="Like(userPost.userPostId)" class="fa fa-thumbs-up"></i>  | 
+                    <i (click)="Dislike(userPost.userPostId)" class="fa fa-thumbs-down"></i>
+                </p>
             </div>
         </div>
     </div>

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { clubPost } from '../models/clubPost';
+import { clubPost, clubPostLike } from '../models/clubPost';
 @Injectable({
   providedIn: 'root'
 })
@@ -17,6 +17,9 @@ export class ClubpostService {
     return this.http.post<clubPost>(environment.HOSTAPI+"ClubPost",post).toPromise();
   }
 
+  LikeDislike(like: clubPostLike): Promise<void>{
+    return this.http.post<void>(environment.HOSTAPI + 'ClubPostLikes', like).toPromise();
+  }
  
 
  
