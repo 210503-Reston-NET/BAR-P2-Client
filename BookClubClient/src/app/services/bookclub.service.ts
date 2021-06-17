@@ -59,8 +59,8 @@ export class BookclubService {
   }
 
   LikeClubPost(id:number,post:clubPost):Promise<clubPost>{
-    console.log("clic......clubPost..................")
-  console.log( this.http.put<clubPost>(environment.HOSTAPI+"ClubPost/LikeClubPost/"+id,post).toPromise())
+   // console.log("clic......clubPost..................")
+  //console.log( this.http.put<clubPost>(environment.HOSTAPI+"ClubPost/LikeClubPost/"+id,post).toPromise())
     return this.http.put<clubPost>(environment.HOSTAPI+"ClubPost/LikeClubPost/"+id,post).toPromise();
   }
   

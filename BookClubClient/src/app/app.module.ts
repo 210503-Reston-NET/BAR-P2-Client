@@ -25,7 +25,7 @@ import { CommentComponent } from './components/comment/comment.component';
 import { ClubpostcommentComponent } from './components/clubpostcomment/clubpostcomment.component';
 import { DataTablesModule } from 'angular-datatables';
 import { BookclubdetailsComponent } from './components/bookclubdetails/bookclubdetails.component';
-
+import { CommonModule } from "@angular/common";
 
 @NgModule({
   declarations: [

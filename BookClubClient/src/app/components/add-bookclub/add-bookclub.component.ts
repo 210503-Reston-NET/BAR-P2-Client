@@ -49,7 +49,7 @@ export class AddBookclubComponent implements OnInit {
   BookSearch(serch: string) {
     this.googleApi.SearchGoogleBooks(serch)
       .subscribe((data: any) => {
-        console.log(data);
+        //console.log(data);
         this.googleBooks = data.items;
       })
   }
@@ -57,6 +57,7 @@ export class AddBookclubComponent implements OnInit {
   AddBookClubClient() {
     this.googleApi.SearchGoogleBookByISBN(this.selected).subscribe((data: any) => {
       this.googleBooks = data.items;
+      
     })
     
   
@@ -68,13 +69,19 @@ export class AddBookclubComponent implements OnInit {
     //this.newbookClub.email = email;
 
     this.AddBookToDB(this.selected, this.newbookClub.name , this.googleBooks[0].volumeInfo.authors[0], this.googleBooks[0].volumeInfo.categories[0], this.newbookClub.img)
-    this.bookclubapi.AddBookClub(this.newbookClub).then(book => console.log(book))
-    this.bookclubapi.getBookclubs().subscribe((data:any)=>{
-      this.googleBooks = data
-    })
+    
+    this.bookclubapi.AddBook(this.bookToAdd).then( book => {console.log("return"); 
+                                                             console.log(book);
+                                                             this.bookclubapi.AddBookClub(this.newbookClub).then(bookclub => console.log(bookclub));
+                                                             this.bookclubapi.getBookclubs().subscribe((data:any)=>{this.googleBooks = data })
+
+                                                 });
+
+    
+    //this.bookclubapi.AddBookClub(this.newbookClub).then(bookclub => console.log(bookclub))
     
 
-    this.notificationService.showSuccess("Thanks for liking","thanks");
+    this.notificationService.showSuccess("Book club created","thanks");
     /*console.log("------------showBookSelected--------")
     console.log(this.newbookClub.description)
     console.log(this.selected)*/
@@ -113,7 +120,7 @@ export class AddBookclubComponent implements OnInit {
     this.bookToAdd.author = author;
     this.bookToAdd.categoryId = categoryName;
     this.bookToAdd.imageUrl = img;
-    this.bookclubapi.AddBook(this.bookToAdd).then( book => {console.log("return"); console.log(book);});
+    //this.bookclubapi.AddBook(this.bookToAdd).then( book => {console.log("return"); console.log(book);});
   }
 
 }

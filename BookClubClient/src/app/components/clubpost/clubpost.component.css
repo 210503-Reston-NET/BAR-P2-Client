@@ -12,3 +12,6 @@ li{list-style-type: none;}
 #dislike:active{
     color: red;
   }
+
+#user-id{margin-left: 90%;
+margin-top: 1px;}

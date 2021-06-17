@@ -23,14 +23,19 @@ export class ViewClubpostsComponent implements OnInit {
     clubPostId:0,
 
   }
-   public clubposts:clubPost[]=[];
+   public clubposts:any;
 
-  constructor(private service:BookclubService,private router:ActivatedRoute) { }
+  constructor(private service:BookclubService,private activatedRoute:ActivatedRoute) { }
 
   ngOnInit(): void {
-    let clubId=this.router.snapshot.params['clubId']
-    this.newpost.BookClubTitle=this.router.snapshot.params['BookClubTitle'];
-    this.service.GetClubPostByBookClub(clubId).then(result => { this.clubposts = result });
+    //let clubId=this.router.snapshot.params['clubId']
+    this.newpost.BookClubTitle=this.activatedRoute.snapshot.queryParams['BookClubTitle']
+    let clubId=this.activatedRoute.snapshot.queryParams['clubId']
+    this.service.GetClubPostByBookClub(clubId).then(result => { this.clubposts = result,
+      console.log(this.clubposts)
+     });
+    console.log("clic........................")
+    console.log(clubId)
       }
 
   doLike(clubpostId:number){
