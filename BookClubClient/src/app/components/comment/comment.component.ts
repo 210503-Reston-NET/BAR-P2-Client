@@ -6,7 +6,8 @@ import { userPost } from '../../models/userPost';
 import { CommentService } from '../../services/comment.service';
 import { AuthService } from '@auth0/auth0-angular';
 import { BookclubService } from '../../services/bookclub.service'
-import { clubPost } from '../../models/clubPost'
+import { CPost } from '../../models/clubPost'
+import { ClubpostService } from  '../../services/clubpost.service'
 
 @Component({
   selector: 'app-comment',
@@ -25,6 +26,18 @@ export class CommentComponent implements OnInit {
     totalLike: 0,
     totalDislike: 0,
     date: "2021-06-15T23:25:22.125"
+  }
+
+  CPost: CPost = {
+    clubPostId: 0,
+    userEmail: "",
+    user: null,
+    post: "",
+    bookClubId: 0,
+    bookClub: null,
+    totalLike: 0,
+    totalDislike: 0,
+    date: ""
   }
 
   uComment: UserComment ={
@@ -48,7 +61,7 @@ export class CommentComponent implements OnInit {
   userPostId: number = 0;
   ClubPostId: number = 0;
 
-  constructor(private bookClubapi: BookclubService, private commentService: CommentService, private userService: UserService, private route: ActivatedRoute, private router: Router, public auth: AuthService) { }
+  constructor(private bookClubapi: BookclubService, private clubPostService: ClubpostService ,private commentService: CommentService, private userService: UserService, private route: ActivatedRoute, private router: Router, public auth: AuthService) { }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(
@@ -67,7 +80,9 @@ export class CommentComponent implements OnInit {
         }
         else{
           this.IsUserPost = false;
+          this.cComment.clubPostID = params.ClubPostId;
           this.commentService.GetClubComment(params.ClubPostId).then(cmts => this.clubComments = cmts);
+          this.clubPostService.GetClubPostById(params.ClubPostId).then(pst => this.CPost = pst);
         }
       }
     )
@@ -77,8 +92,15 @@ export class CommentComponent implements OnInit {
     if (this.IsUserPost){
       console.log(this.uComment);
       this.commentService.AddUserComment(this.uComment).then(cmt => {
-        console.log(cmt);
-        this.commentService.GetUserComment(this.userPostId).then(cmts => this.userComments = cmts);
+          console.log(cmt);
+          this.commentService.GetUserComment(this.userPostId).then(cmts => this.userComments = cmts);
+        });
+    }
+    else{
+      console.log(this.cComment);
+      this.commentService.AddClubComment(this.cComment).then(cm => {
+        console.log(cm);
+        this.commentService.GetClubComment(this.ClubPostId).then(cmts => this.clubComments = cmts);
       });
     }
 
