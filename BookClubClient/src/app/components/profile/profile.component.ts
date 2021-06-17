@@ -114,51 +114,71 @@ export class ProfileComponent implements OnInit {
   }
 
   AddBookToFavorite(isbn: string, title:string, author:string, categoryName:string, img: string, email:string | undefined){
-    this.AddBookToDB(isbn, title, author, categoryName, img);
-    
-    this.favBook.userEmail = this.userEmail;
-    this.favBook.isbn = isbn;
-    this.bookapi.AddFavoriteBooK(this.favBook).then(bk => {
-      console.log(bk);
-      this.bookapi.GetFavoriteBooks(this.userEmail).then(bk => this.favoriteBooks = bk);
-    });
-    this.googleBooks = null;
-    this.router.navigate(['Profile'])
-  }
-
-  AddBookToRead(isbn: string, title:string, author:string, categoryName:string, img: string, email:string | undefined){
-    this.AddBookToDB(isbn, title, author, categoryName, img);
-    
-    this.bookToRead.userEmail = this.userEmail;
-    this.bookToRead.isbn = isbn;
-    this.bookapi.AddBooKToRead(this.bookToRead).then(bk => {
-      console.log(bk);
-      this.bookapi.GetBooksToRead(this.userEmail).then(bk => this.booksToRead = bk);
-    });
-    this.googleBooks = null;
-    this.router.navigate(['Profile'])
-  }
-
-  AddBooksRead(isbn: string, title:string, author:string, categoryName:string, pages:number, img: string, email:string | undefined){
-    this.AddBookToDB(isbn, title, author, categoryName, img);
     this.bookToAdd.isbn = isbn;
     this.bookToAdd.title = title;
     this.bookToAdd.author = author;
     this.bookToAdd.categoryId = categoryName;
     this.bookToAdd.imageUrl = img;
-
-    this.bookRead.userEmail = this.userEmail;
-    this.bookRead.isbn = isbn;
-    this.bookRead.bookPages = pages!;
-    console.log("in profile component " + email);
-    console.log(this.booksRead);
+    console.log("adding book");
+    console.log(this.bookToAdd);
     
-    this.bookapi.AddBooksRead(this.bookRead).then(bk => {
-      console.log(bk);
-      this.bookapi.GetBooksRead(this.userEmail).then(bk => {this.booksRead = bk; this.numBooks = bk.length;});
-    });
-    this.googleBooks = null;
-    this.router.navigate(['Profile'])
+    this.bookapi.AddBook(this.bookToAdd).then( bk => 
+      {
+        this.favBook.userEmail = this.userEmail;
+        this.favBook.isbn = isbn;
+        this.bookapi.AddFavoriteBooK(this.favBook).then(bk => {
+          console.log(bk);
+          this.bookapi.GetFavoriteBooks(this.userEmail).then(bk => this.favoriteBooks = bk);
+        });
+        this.googleBooks = null;
+      });
+}
+
+  AddBookToRead(isbn: string, title:string, author:string, categoryName:string, img: string, email:string | undefined){
+    this.bookToAdd.isbn = isbn;
+    this.bookToAdd.title = title;
+    this.bookToAdd.author = author;
+    this.bookToAdd.categoryId = categoryName;
+    this.bookToAdd.imageUrl = img;
+    console.log("adding book");
+    console.log(this.bookToAdd);
+    
+    this.bookapi.AddBook(this.bookToAdd).then( bk => 
+      {
+        this.bookToRead.userEmail = this.userEmail;
+        this.bookToRead.isbn = isbn;
+        this.bookapi.AddBooKToRead(this.bookToRead).then(bk => {
+          console.log(bk);
+          this.bookapi.GetBooksToRead(this.userEmail).then(bk => this.booksToRead = bk);
+        });
+        this.googleBooks = null;
+      });
+    
+  }
+
+  AddBooksRead(isbn: string, title:string, author:string, categoryName:string, pages:number, img: string, email:string | undefined){
+    this.bookToAdd.isbn = isbn;
+    this.bookToAdd.title = title;
+    this.bookToAdd.author = author;
+    this.bookToAdd.categoryId = categoryName;
+    this.bookToAdd.imageUrl = img;
+    console.log("adding book");
+    console.log(this.bookToAdd);
+    this.bookapi.AddBook(this.bookToAdd).then( bk => 
+      {
+        console.log(bk);
+        this.bookRead.userEmail = this.userEmail;
+        this.bookRead.isbn = isbn;
+        this.bookRead.bookPages = pages!;
+        console.log("in profile component " + email);
+        console.log(this.booksRead);
+        
+        this.bookapi.AddBooksRead(this.bookRead).then(bk => {
+          console.log(bk);
+          this.bookapi.GetBooksRead(this.userEmail).then(bk => {this.booksRead = bk; this.numBooks = bk.length;});
+        });
+        this.googleBooks = null;
+      })
   }
 
   GotoComments(UserPostId: number){
