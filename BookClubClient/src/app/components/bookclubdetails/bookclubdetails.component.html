@@ -12,12 +12,12 @@
                 <p class="card-text">
                     <li>{{newbookClub.description}}</li>
                 </p>
-                <span hidden id="bookClubId">{{newbookClub.bookClubId}}</span>
+                <span id="bookClubId">{{newbookClub.bookClubId}}</span>
                
-
+                
                 <div class="card-body">
-                    <a [routerLink]="['/AddClubPost', newbookClub.bookClubId,newbookClub.name]" class="card-link">new post</a> &nbsp;&nbsp;&nbsp;
-                    <a [routerLink]="['/Viewclubpost',newbookClub.bookClubId,newbookClub.name]" class="card-link">view post</a> &nbsp;&nbsp;&nbsp;
+                    <a (click)="GotoAddClubPost(newbookClub.bookClubId,newbookClub.name)" class="card-link">new post</a> &nbsp;&nbsp;&nbsp;
+                    <a (click)="GotoViewclubpost(newbookClub.bookClubId,newbookClub.name)" class="card-link">view post</a> &nbsp;&nbsp;&nbsp;
                 </div>
             </div>
         </div>

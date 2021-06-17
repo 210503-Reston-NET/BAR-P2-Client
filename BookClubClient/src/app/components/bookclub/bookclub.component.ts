@@ -32,5 +32,9 @@ export class BookclubComponent implements OnInit {
     return this.router.navigate(['bookclubdetail'],{ queryParams: { "clubId": id,"BookClubTitle":title } });
   }
 
+  GotoAddB(){
+    return this.router.navigate(['Addbookclub']);
+  }
+
 
 }

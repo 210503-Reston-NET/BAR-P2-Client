@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { clubPost } from 'src/app/models/clubPost';
 import { BookclubService } from 'src/app/services/bookclub.service';
 import { AuthService } from '@auth0/auth0-angular';
@@ -31,27 +31,32 @@ export class ClubpostComponent implements OnInit {
    token:boolean=true;
 
    // I use activate route to get route parameters
-  constructor(private service:BookclubService,private router:ActivatedRoute,private notificationService:NotificationService,public auth: AuthService) { }
+  constructor(private service:BookclubService,private activatedRoute:ActivatedRoute,private router:Router, private notificationService:NotificationService,public auth: AuthService) { }
  
 
   ngOnInit(): void {
     this.auth.user$.subscribe((profile)=>{
       (this.userEmail = profile?.email!);
     })
-   
+    
 
-    let clubId=this.router.snapshot.params['clubId']
-    this.newpost.BookClubTitle=this.router.snapshot.params['BookClubTitle'];
-    this.service.GetClubPostByBookClub(clubId).then(result => { this.clubposts = result });
+    let clubId=this.activatedRoute.snapshot.params['clubId']
+    this.newpost.BookClubTitle=this.activatedRoute.snapshot.params['BookClubTitle'];
+    this.service.GetClubPostByBookClub(clubId).then(result => { this.clubposts = result, console.log(this.clubposts )});
+    console.log("+++++++++++++++++ ++ngOnInit++++++++++++++++++++++++++")
+    console.log(clubId)
+    
      }
 onSubmit():void{
-  let bookclubId=this.router.snapshot.params['clubId']
+  let bookclubId=this.activatedRoute.snapshot.params['clubId']
   
   this.newpost.BookClubID=bookclubId;
   this.newpost.userEmail=this.userEmail;
-  this.newpost.BookClubTitle=this.router.snapshot.params['BookClubTitle'];
+  this.newpost.BookClubTitle=this.activatedRoute.snapshot.params['BookClubTitle'];
   delete this.newpost.BookClubTitle;
   this.service.AddClubPost(this.newpost).then(result=>{console.log(result)});
+
+  this.router.navigate(['ClubPosts'],{queryParams:{'clubId':bookclubId}});
 }
 
 

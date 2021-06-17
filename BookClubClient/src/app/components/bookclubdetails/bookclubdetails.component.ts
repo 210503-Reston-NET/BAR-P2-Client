@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { BookClub } from 'src/app/models/bookClub';
 import { BookclubService } from 'src/app/services/bookclub.service';
 import { NotificationService } from 'src/app/services/notification.service';
@@ -33,10 +33,11 @@ export class BookclubdetailsComponent implements OnInit {
     user: null,
     userEmail: null
   }
-  constructor(private service:BookclubService,private router:ActivatedRoute,private notificationService:NotificationService) { }
+  Id:number=0;
+  constructor(private service:BookclubService,private activatedRoute:ActivatedRoute,private router:Router,private notificationService:NotificationService) { }
 
   ngOnInit(): void {
-    let clubId=this.router.snapshot.queryParams['clubId']
+    let clubId=this.activatedRoute.snapshot.queryParams['clubId']
 
     //this.bookclubs=this.service.getBookClubById(clubId);
     this.service.getBookClubById(clubId).then((data:any)=>{
@@ -45,8 +46,17 @@ export class BookclubdetailsComponent implements OnInit {
       this.newbookClub.description=this.bookclubs.description
       console.log(this.bookclubs)
     })
-    
-    
+        
+  }
+
+  GotoAddClubPost(id:number,title:string){
+    return this.router.navigate(['AddClubPost'],{ queryParams: { "clubId": id,"BookClubTitle":title } });
+
+  }
+
+  GotoViewclubpost(id:number,title:string){
+    return this.router.navigate(['bookclubdetail'],{ queryParams: { "clubId": id,"BookClubTitle":title } });
+
   }
 
 }

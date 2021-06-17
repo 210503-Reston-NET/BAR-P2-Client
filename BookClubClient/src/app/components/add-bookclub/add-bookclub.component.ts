@@ -65,7 +65,7 @@ export class AddBookclubComponent implements OnInit {
     this.newbookClub.ISBN = this.selected;
     this.newbookClub.description;
     this.newbookClub.img = this.googleBooks[0].volumeInfo.imageLinks.smallThumbnail;
-    //this.newbookClub.email = email;
+    this.newbookClub.email = this.userEmail;
 
     this.AddBookToDB(this.selected, this.newbookClub.name , this.googleBooks[0].volumeInfo.authors[0], this.googleBooks[0].volumeInfo.categories[0], this.newbookClub.img)
     this.bookclubapi.AddBookClub(this.newbookClub).then(book => console.log(book))
@@ -74,11 +74,7 @@ export class AddBookclubComponent implements OnInit {
     })
     
 
-    this.notificationService.showSuccess("Thanks for liking","thanks");
-    /*console.log("------------showBookSelected--------")
-    console.log(this.newbookClub.description)
-    console.log(this.selected)*/
-
+    this.notificationService.showSuccess("Book club created","thanks");
     this.router.navigate(['bookclubs'])
   }
 

@@ -34,7 +34,7 @@ export class BookclubService {
 
   AddBookClub(newBookclub:BookClub) : Promise<BookClub>{
   
-    return this.http.post<BookClub>("https://localhost:44309/api/BookClub", newBookclub).toPromise().then(bk => bk);
+    return this.http.post<BookClub>(environment.HOSTAPI+"BookClub", newBookclub).toPromise().then(bk => bk);
   }
 
   AddBook(newBook:book) : Promise<book>{
