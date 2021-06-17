@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { userPost } from '../../models/userPost'
+import { userPost, userPostLike } from '../../models/userPost'
 import { book } from '../../models/book';
 import { FollowUser } from '../../models/user';
 import { GoogleApiService } from '../../services/google-api.service';
@@ -27,6 +27,16 @@ export class AccountComponent implements OnInit {
   followUser: FollowUser = {
     followUserId: 0,
     followerEmail: "",
+    userEmail: "",
+    user: null
+  }
+
+  like: userPostLike = {
+    userPostLikesId: 0,
+    like: false,
+    dislike: false,
+    userPostId: 0,
+    userPost: null,
     userEmail: "",
     user: null
   }
@@ -63,6 +73,32 @@ export class AccountComponent implements OnInit {
       console.log(fl);
       this.userService.IsFollower(this.userEmail, this.accountEmail).then(bl => this.isFollowing = bl);
     });
+  }
+
+  Like(postId: number){
+    this.like.userPostId = postId;
+    this.like.userEmail = this.userEmail;
+    this.like.like = true;
+    this.like.dislike = false;
+    console.log(this.like);
+    this.userService.LikeDislike(this.like).then(lk => 
+      {
+        console.log(lk);
+        this.userService.GetUserPost(this.accountEmail).then(pst => this.userPosts = pst);
+      });
+  }
+
+  Dislike(postId: number){
+    this.like.userPostId = postId;
+    this.like.userEmail = this.userEmail;
+    this.like.like = false;
+    this.like.dislike = true;
+    console.log(this.like);
+    this.userService.LikeDislike(this.like).then(lk => 
+      {
+        console.log(lk);
+        this.userService.GetUserPost(this.accountEmail).then(pst => this.userPosts = pst);
+      });
   }
 
   GotoComments(UserPostId: number){

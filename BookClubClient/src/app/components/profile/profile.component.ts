@@ -5,7 +5,7 @@ import { BookService } from '../../services/book.service';
 import { UserService } from '../../services/user.service';
 import { book, FavoriteBook, BookToRead, BooksRead } from '../../models/book';
 import { Router } from '@angular/router';
-import { userPost } from '../../models/userPost'
+import { userPost, userPostLike } from '../../models/userPost'
 
 @Component({
   selector: 'app-profile',
@@ -67,6 +67,16 @@ export class ProfileComponent implements OnInit {
     bookPages: 0
   }
 
+  like: userPostLike = {
+    userPostLikesId: 0,
+    like: false,
+    dislike: false,
+    userPostId: 0,
+    userPost: null,
+    userEmail: "",
+    user: null
+  }
+
   constructor(private googleApi: GoogleApiService, private bookapi: BookService, private userService: UserService,private router: Router, public auth: AuthService) { }
 
   ngOnInit(): void {
@@ -124,6 +134,7 @@ export class ProfileComponent implements OnInit {
     
     this.bookapi.AddBook(this.bookToAdd).then( bk => 
       {
+        console.log(bk);
         this.favBook.userEmail = this.userEmail;
         this.favBook.isbn = isbn;
         this.bookapi.AddFavoriteBooK(this.favBook).then(bk => {
@@ -145,6 +156,7 @@ export class ProfileComponent implements OnInit {
     
     this.bookapi.AddBook(this.bookToAdd).then( bk => 
       {
+        console.log(bk);
         this.bookToRead.userEmail = this.userEmail;
         this.bookToRead.isbn = isbn;
         this.bookapi.AddBooKToRead(this.bookToRead).then(bk => {
@@ -179,6 +191,32 @@ export class ProfileComponent implements OnInit {
         });
         this.googleBooks = null;
       })
+  }
+
+  Like(postId: number){
+    this.like.userPostId = postId;
+    this.like.userEmail = this.userEmail;
+    this.like.like = true;
+    this.like.dislike = false;
+    console.log(this.like);
+    this.userService.LikeDislike(this.like).then(lk => 
+      {
+        console.log(lk);
+        this.userService.GetUserPost(this.userEmail).then(pst => this.userPosts = pst);
+      });
+  }
+
+  Dislike(postId: number){
+    this.like.userPostId = postId;
+    this.like.userEmail = this.userEmail;
+    this.like.like = false;
+    this.like.dislike = true;
+    console.log(this.like);
+    this.userService.LikeDislike(this.like).then(lk => 
+      {
+        console.log(lk);
+        this.userService.GetUserPost(this.userEmail).then(pst => this.userPosts = pst);
+      });
   }
 
   GotoComments(UserPostId: number){

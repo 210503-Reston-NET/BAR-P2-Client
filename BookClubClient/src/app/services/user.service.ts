@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { user, FollowUser } from '../models/user';
-import { userPost } from '../models/userPost';
+import { userPost, userPostLike } from '../models/userPost';
 import { UserComment } from '../models/comment';
 import { environment } from 'src/environments/environment';
 import { userFeed } from '../models/userFeed'
@@ -55,5 +55,9 @@ export class UserService {
 
   GetUserFeed(email: string) : Promise<userFeed[]>{
     return this.http.get<userFeed[]>(environment.HOSTAPI + "UserFeed/" + email).toPromise();
+  }
+
+  LikeDislike(like: userPostLike): Promise<void>{
+    return this.http.post<void>(environment.HOSTAPI + 'UserPostLikes', like).toPromise();
   }
 }

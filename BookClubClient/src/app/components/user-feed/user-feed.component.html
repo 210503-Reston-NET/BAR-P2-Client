@@ -13,6 +13,10 @@
             <h6>{{fd.userEmail}} | {{fd.bookClub}}</h6>
             <p >{{fd.post}}</p>
             <p>{{fd.totalLike}} Likes | {{fd.totalDislike}} Dislikes</p>
+            <p>
+                <i (click)="Like(fd.userPostId, fd.clubPostId)" class="fa fa-thumbs-up"></i>  | 
+                <i (click)="Dislike(fd.userPostId, fd.clubPostId)" class="fa fa-thumbs-down"></i>
+            </p>
         </div>
     </div>
 </div>

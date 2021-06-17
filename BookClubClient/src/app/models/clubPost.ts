@@ -12,4 +12,14 @@ export interface clubPost {
     clubPostId:number,
 }
 
+export interface clubPostLike{
+    clubPostLikesId: number,
+    like: boolean,
+    dislike: boolean,
+    clubPostId: number,
+    clubPost: null,
+    userEmail: string,
+    user: null
+}
+
 

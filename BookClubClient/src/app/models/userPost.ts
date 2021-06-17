@@ -7,3 +7,13 @@ export interface userPost {
     totalDislike: number,
     date: string; 
 }
+
+export interface userPostLike{
+    userPostLikesId: number,
+    like: boolean,
+    dislike: boolean,
+    userPostId: number,
+    userPost: null,
+    userEmail: string,
+    user: null
+}
