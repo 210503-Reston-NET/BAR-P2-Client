@@ -4,6 +4,7 @@ import { user, FollowUser } from '../models/user';
 import { userPost } from '../models/userPost';
 import { UserComment } from '../models/comment';
 import { environment } from 'src/environments/environment';
+import { userFeed } from '../models/userFeed'
 
 @Injectable({
   providedIn: 'root'
@@ -39,11 +40,20 @@ export class UserService {
     return this.http.post<FollowUser>(environment.HOSTAPI + 'FollowUser', followerUser).toPromise();
   }
 
+
+  UnFollow(followerEmail: string, followedEmail: string): Promise<void>{
+    return this.http.delete<void>( environment.HOSTAPI + 'FollowUser/DeleteFollowersByUser/'+followerEmail+'/'+followedEmail ).toPromise();
+  }
+
   GetComments(UserPostId: number): Promise<UserComment[]>{
     return this.http.get<UserComment[]>(environment.HOSTAPI + 'Comment/GetUserPostComments/'+ UserPostId).toPromise();
   }
 
   GetPostById(postId: number): Promise<userPost>{
     return this.http.get<userPost>(environment.HOSTAPI + 'UserPost/' + postId).toPromise();
+  }
+
+  GetUserFeed(email: string) : Promise<userFeed[]>{
+    return this.http.get<userFeed[]>(environment.HOSTAPI + "UserFeed/" + email).toPromise();
   }
 }
