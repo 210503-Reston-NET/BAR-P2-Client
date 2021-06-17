@@ -18,7 +18,10 @@ export class ViewClubpostsComponent implements OnInit {
     post: '',
     BookClubTitle:'',
     userEmail:'',
-    bookClub:null
+    bookClub:null,
+    date:'',
+    clubPostId:0,
+
   }
    public clubposts:clubPost[]=[];
 

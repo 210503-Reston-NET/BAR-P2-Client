@@ -1,14 +1,14 @@
 <div class="container">
 
 
-<div id="addclubId"><li><a routerLink="[Addbookclub]" class="btn btn-success">Add new club</a></li></div>
+<div id="addclubId"><a class="btn btn-primary btn-sm" (click)="GotoAddbookclub()">Add new club</a></div>
 <table class="table">
   <thead class="thead-dark">
     <tr>
       <th scope="col">Title</th>
       <th scope="col">Description</th>
       <th scope="col">Author</th>
-      <th>Options</th>
+      <th>Details</th>
     </tr>
   </thead>
   <tbody>
@@ -19,7 +19,7 @@
       <td>{{b.email}}</td>
       <td>
     
-      <a  class="btn btn-primary"  ><i class="fas fa-thumbs-down" id="selectionid" (click)="ViewClubdetails(b.bookClubId,b.name)"></i></a>
+      <a  class="btn btn-success btn-sm"  ><i  id="selectionid" (click)="ViewClubdetails(b.bookClubId,b.name)">Details</i></a>
     </td>
     </tr>
    

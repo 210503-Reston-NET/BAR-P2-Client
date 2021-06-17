@@ -16,11 +16,45 @@
                
 
                 <div class="card-body">
-                    <a [routerLink]="['/AddClubPost', newbookClub.bookClubId,newbookClub.name]" class="card-link">new post</a> &nbsp;&nbsp;&nbsp;
-                    <a [routerLink]="['/Viewclubpost',newbookClub.bookClubId,newbookClub.name]" class="card-link">view post</a> &nbsp;&nbsp;&nbsp;
-                </div>
+                     
+                    <li (click)="GotoAddClubPost(newbookClub.bookClubId, newbookClub.name)" class="card-link">new post</li>
+                    &nbsp;&nbsp;&nbsp;
+                    <li (click)="GotoViewClubPost(newbookClub.bookClubId, newbookClub.name)" class="card-link">new post</li>
+
+                                  </div>
             </div>
         </div>
     </ul>
-
+    <div class="row">
+        <div class="col-md-3"></div>
+    
+        <div id="previous-club-post" class="col-md-6">
+            <p> comments here</p>
+            <ul *ngFor="let b of bookclubs">
+                <div class="card" style="width: 80rem;">
+    
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <li>{{b.post}}</li>
+                        </h5>
+                        <p class="card-text">
+                            <li>{{b.user}}</li>
+                        </p>
+                        <h5 class="card-title"><span><span>Like: {{b.totalLike}}</span> |
+                                <span>Dislike:{{b.totalDislike}}</span></span></h5>
+                        <!--div class="card-body">
+                            <a class="card-link"><i class="fas fa-thumbs-up" id="like" (click)="doLike(b.id)"></i></a>
+                            &nbsp;&nbsp;&nbsp;
+                            <a class="card-link"><i class="fas fa-thumbs-down" id="dislike"
+                                    (click)="doDisLike(b.id)"></i></a>
+                                   
+                        </div-->
+                    </div>
+                </div>
+                <hr />
+            </ul>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+    
 </div>

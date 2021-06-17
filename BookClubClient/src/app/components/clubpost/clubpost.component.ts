@@ -21,7 +21,9 @@ export class ClubpostComponent implements OnInit {
     post: '',
     BookClubTitle:'',
     userEmail:'',
-    bookClub:null
+    bookClub:null,
+    date:'',
+    clubPostId:0
   }
    public clubposts:clubPost[]=[];
 
@@ -47,11 +49,18 @@ export class ClubpostComponent implements OnInit {
 onSubmit():void{
   let bookclubId=this.router.snapshot.params['clubId']
   
-  this.newpost.BookClubID=bookclubId;
+  this.newpost.BookClubID=2;
   this.newpost.userEmail=this.userEmail;
+  this.newpost.userEmail="testaccount@gmail.com"
   this.newpost.BookClubTitle=this.router.snapshot.params['BookClubTitle'];
+  //this.newpost.post=this.p;
+  this.newpost.date="2021-06-16T15:10:09.721453"
   delete this.newpost.BookClubTitle;
-  this.service.AddClubPost(this.newpost).then(result=>{console.log(result)});
+  //this.service.AddClubPost(this.newpost).then(result=>{console.log(result)});
+
+  console.log("adding clup post")
+  console.log(this.service.AddClubPost(this.newpost).then(result=>{console.log(result)}))
+  console.log("--------------------------------")
 }
 
 

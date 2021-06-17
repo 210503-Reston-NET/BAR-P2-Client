@@ -7,7 +7,9 @@ export interface clubPost {
     post: string,
     BookClubTitle?: string,
     userEmail:string,
-    bookClub:null
+    bookClub:null,
+    date:string,
+    clubPostId:number,
 }
 
 
