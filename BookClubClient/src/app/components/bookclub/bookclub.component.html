@@ -1,22 +1,26 @@
 <div class="container">
 
 
-
+<div id="addclubId"><a class="btn btn-primary btn-sm" (click)="GotoAddbookclub()">Add new club</a></div>
 <table class="table">
   <thead class="thead-dark">
     <tr>
       <th scope="col">Title</th>
       <th scope="col">Description</th>
       <th scope="col">Author</th>
-      <th>Options</th>
+      <th>Details</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let b of bookclubs">
       <th scope="row">{{b.name}}</th>
+      <td hidden>{{b.bookClubId}}</td>
       <td>{{b.description}}</td>
       <td>{{b.email}}</td>
-      <td><a [routerLink]="['/ClubPostDetails', b.id,b.name]" class="btn btn-primary">details</a></td>
+      <td>
+    
+      <a  class="btn btn-success btn-sm"  ><i  id="selectionid" (click)="ViewClubdetails(b.bookClubId,b.name)">Details</i></a>
+    </td>
     </tr>
    
   </tbody>

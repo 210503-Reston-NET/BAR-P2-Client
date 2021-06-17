@@ -77,7 +77,7 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'Viewclubpost/:clubId/:BookClubTitle',
+    path: 'Viewclubpost',
     component: ViewClubpostsComponent,
     canActivate: [AuthGuard]
   },

@@ -21,12 +21,19 @@ export class BookclubComponent implements OnInit {
     .subscribe(
       data=>{
       this.bookclubs=data;
-     
+           
       },
       error=>{console.error();
       }
       )
   }
 
+  ViewClubdetails(id:number, title:string){
+    return this.router.navigate(['bookclubdetail'],{ queryParams: { "clubId": id,"BookClubTitle":title } });
+  }
+  GotoAddbookclub(){
+    return this.router.navigate(['Addbookclub']);
+
+  }
 
 }

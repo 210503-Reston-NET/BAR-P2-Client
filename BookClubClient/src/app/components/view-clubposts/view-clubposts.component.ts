@@ -11,12 +11,17 @@ import { BookclubService } from 'src/app/services/bookclub.service';
 export class ViewClubpostsComponent implements OnInit {
   newpost:clubPost={
     id:0,
-    user: '',
+    user: null,
     BookClubID: 0,
     totalLike: 0,
     totalDislike: 0,
     post: '',
-    BookClubTitle:''
+    BookClubTitle:'',
+    userEmail:'',
+    bookClub:null,
+    date:'',
+    clubPostId:0,
+
   }
    public clubposts:clubPost[]=[];
 

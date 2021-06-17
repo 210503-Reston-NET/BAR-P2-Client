@@ -27,6 +27,11 @@ export class BookclubService {
     return this.http.get(environment.HOSTAPI+"/Book");
   }
 
+  getBookClubById(id:number) : Promise<BookClub>{
+  
+    return this.http.get<BookClub>(environment.HOSTAPI+"BookClub/"+id).toPromise().then(x=>x);
+  }
+
   AddBookClub(newBookclub:BookClub) : Promise<BookClub>{
   
     return this.http.post<BookClub>(environment.HOSTAPI+"BookClub", newBookclub).toPromise().then(bk => bk);

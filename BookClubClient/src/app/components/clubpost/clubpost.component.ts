@@ -11,14 +11,19 @@ import { NotificationService } from 'src/app/services/notification.service';
   styleUrls: ['./clubpost.component.css']
 })
 export class ClubpostComponent implements OnInit {
+  userEmail: string = "";
   newpost:clubPost={
     id:0,
-    user: '',
+    user: null,
     BookClubID: 0,
     totalLike: 0,
     totalDislike: 0,
     post: '',
-    BookClubTitle:''
+    BookClubTitle:'',
+    userEmail:'',
+    bookClub:null,
+    date:'',
+    clubPostId:0
   }
    public clubposts:clubPost[]=[];
 
@@ -28,25 +33,36 @@ export class ClubpostComponent implements OnInit {
    token:boolean=true;
 
    // I use activate route to get route parameters
-  constructor(private service:BookclubService,private router:ActivatedRoute,private notificationService:NotificationService) { }
+  constructor(private service:BookclubService,private router:ActivatedRoute,private notificationService:NotificationService,public auth: AuthService) { }
  
 
   ngOnInit(): void {
-    this.token=this.router.snapshot.params['token']
+    this.auth.user$.subscribe((profile)=>{
+      (this.userEmail = profile?.email!);
+    })
+   
+
     let clubId=this.router.snapshot.params['clubId']
-    //alert("token-"+this.token)
-    console.log(this.token)
     this.newpost.BookClubTitle=this.router.snapshot.params['BookClubTitle'];
     this.service.GetClubPostByBookClub(clubId).then(result => { this.clubposts = result });
      }
 onSubmit():void{
   let bookclubId=this.router.snapshot.params['clubId']
   
-  this.newpost.BookClubID=bookclubId;
+  this.newpost.BookClubID=2;
+  this.newpost.userEmail=this.userEmail;
+  this.newpost.userEmail="testaccount@gmail.com"
   this.newpost.BookClubTitle=this.router.snapshot.params['BookClubTitle'];
+  //this.newpost.post=this.p;
+  this.newpost.date="2021-06-16T15:10:09.721453"
   delete this.newpost.BookClubTitle;
-  this.service.AddClubPost(this.newpost).then(result=>{});
+  //this.service.AddClubPost(this.newpost).then(result=>{console.log(result)});
+
+  console.log("adding clup post")
+  console.log(this.service.AddClubPost(this.newpost).then(result=>{console.log(result)}))
+  console.log("--------------------------------")
 }
+
 
 
 
