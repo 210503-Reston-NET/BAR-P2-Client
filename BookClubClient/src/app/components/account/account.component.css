@@ -3,8 +3,7 @@
     width: 90%;
     border: 1px;
     padding: 20px;
-    background-color: aliceblue;
-    opacity: 0.9;
+    background: rgba(300, 300, 300, 0.85)
     
 }
 .user-email{
@@ -19,9 +18,6 @@
     text-align: center;
 }
 
-.table{
-    width: 30%;
-}
 
 .post{
     margin: 10px;

@@ -1,4 +1,4 @@
-<div class="full-comment">
+<div class="full-comment" *ngIf="IsUserPost == true">
     <div class="post" *ngIf="UPost">
         <h5>{{UPost.userEmail}}</h5>
         <p>{{UPost.post}}</p>
@@ -8,7 +8,7 @@
         <form  (ngSubmit)="onSubmit()" #reviewForm="ngForm">
             <div class="form-group">
                 <label for="message">Comment: </label>
-                <input type="text" [(ngModel)]="comment.message" class="form-control" #name="ngModel"
+                <input type="text" [(ngModel)]="uComment.message" class="form-control" #name="ngModel"
                     placeholder="Please leave your comment" name="message">
             </div>
             <button type="submit" class="btn btn-secondary">Add Comment</button>
@@ -16,7 +16,32 @@
     </div>
 
     <div class="comments">
-        <div class="comment" *ngFor ="let comment of comments">
+        <div class="comment" *ngFor ="let comment of userComments">
+            <h6>{{comment.userEmail}}</h6>
+            <p>{{comment.message}}</p>
+        </div>
+    </div>
+</div>
+
+<div class="full-comment" *ngIf="IsUserPost == false">
+    <div class="post" *ngIf="UPost">
+        <h5>{{UPost.userEmail}}</h5>
+        <p>{{UPost.post}}</p>
+    </div>
+
+    <div class="comment-add">
+        <form  (ngSubmit)="onSubmit()" #reviewForm="ngForm">
+            <div class="form-group">
+                <label for="message">Comment: </label>
+                <input type="text" [(ngModel)]="cComment.message" class="form-control" #name="ngModel"
+                    placeholder="Please leave your comment" name="message">
+            </div>
+            <button type="submit" class="btn btn-secondary">Add Comment</button>
+        </form>
+    </div>
+
+    <div class="comments">
+        <div class="comment" *ngFor ="let comment of clubComments">
             <h6>{{comment.userEmail}}</h6>
             <p>{{comment.message}}</p>
         </div>
