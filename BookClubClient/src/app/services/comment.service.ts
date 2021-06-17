@@ -23,6 +23,6 @@ export class CommentService {
   }
 
   GetClubComment(postId: number) : Promise<ClubComment[]>{
-    return this.http.get<ClubComment[]>(environment.HOSTAPI + 'ClubComment/GetUserPostComments/' + postId).toPromise();
+    return this.http.get<ClubComment[]>(environment.HOSTAPI + 'ClubComment/GetClubPostComments/' + postId).toPromise();
   }
 }

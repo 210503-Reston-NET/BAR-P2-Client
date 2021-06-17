@@ -12,6 +12,18 @@ export interface clubPost {
     clubPostId:number,
 }
 
+export interface CPost{
+    clubPostId: number,
+    userEmail: string,
+    user: null,
+    post: string,
+    bookClubId: number,
+    bookClub: null,
+    totalLike: number,
+    totalDislike: number,
+    date: string
+}
+
 export interface clubPostLike{
     clubPostLikesId: number,
     like: boolean,

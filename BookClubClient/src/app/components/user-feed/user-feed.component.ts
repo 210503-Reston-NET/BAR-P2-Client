@@ -155,6 +155,14 @@ export class UserFeedComponent implements OnInit {
             });
         });
     }
+  }
 
+  GotoComments(userPostId: number, clubPostId: number){
+    if (clubPostId < 1){
+      this.router.navigate(['Comments'], { queryParams: { UserPostId: userPostId, ClubPostId: 0 } });
+    }
+    else{
+      this.router.navigate(['Comments'], { queryParams: { UserPostId: 0, ClubPostId: clubPostId } });
+    }
   }
 }
