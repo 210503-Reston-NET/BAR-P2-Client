@@ -1,0 +1,9 @@
+<div class="full-feed">
+    <div class="feeds">
+        <div class="post" *ngFor="let fd of feed">
+            <h6>{{fd.userEmail}} | {{fd.bookClub}}</h6>
+            <p >{{fd.post}}</p>
+            <p>{{fd.totalLike}} Likes | {{fd.totalDislike}} Dislikes</p>
+        </div>
+    </div>
+</div>
