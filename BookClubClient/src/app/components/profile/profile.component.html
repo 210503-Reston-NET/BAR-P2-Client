@@ -29,7 +29,7 @@
     </div>
     <div class="container" >
         <div class="row">
-            <div class="col-sm" *ngIf="booksToRead" id="f">
+            <div class="col-sm-4" *ngIf="booksToRead" id="f">
                 <h4>Books to read</h4>
                 <table class="table">
                     <thead>
@@ -45,7 +45,7 @@
                 </table>
             </div>
 
-            <div class="col-sm" *ngIf="booksRead" id="f">
+            <div class="col-sm-4" *ngIf="booksRead" id="f">
                 <h4>Books read</h4>
                 <table class="table">
                     <thead>
@@ -61,7 +61,7 @@
                 </table>
             </div>
 
-            <div class="col-sm" *ngIf="favoriteBooks" id="f">
+            <div class="col-sm-4" *ngIf="favoriteBooks" id="f">
                 <h4>Favorite Books</h4>
                 <table class="table">
                     <thead>
@@ -79,10 +79,14 @@
         </div>
     </div>
     <div class="user-posts">
-        <div>
-            <input type="text" placeholder="make a post" #post />
-            <button (click)="MakePost(post.value)">POST</button>
-        </div>
+        <form  (ngSubmit)="MakePost()" #reviewForm="ngForm">
+            <div class="form-group">
+                <label for="message">Post </label>
+                <input type="text" [(ngModel)]="UPost.post" class="form-control" #name="ngModel"
+                    placeholder="Please leave say whats on your mind" name="message">
+            </div>
+            <button type="submit" class="btn btn-secondary">Post</button>
+        </form>
         <div *ngIf="userPosts" id="f">
             <div class="post" *ngFor="let userPost of userPosts">
                 <h6>{{userPost.userEmail}}</h6>

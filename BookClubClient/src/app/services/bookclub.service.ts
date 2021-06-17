@@ -67,4 +67,8 @@ export class BookclubService {
   DislikeClubPost(id:number,post:clubPost):Promise<clubPost>{
     return this.http.put<clubPost>(environment.HOSTAPI+"ClubPost/DislikeClubPost/"+id,post).toPromise();
   }
+
+  GetClubPostByID(postId: number) : Promise<clubPost>{
+    return this.http.get<clubPost>(environment.HOSTAPI+ "ClubPost/" + postId).toPromise();
+  }
 }

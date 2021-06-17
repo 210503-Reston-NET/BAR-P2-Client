@@ -1,23 +1,11 @@
-.full-profile{
+.full-feed{
     margin: auto;
     width: 90%;
     border: 1px;
     padding: 20px;
-    background: rgba(300, 300, 300, 0.85)
+    background: rgba(300, 300, 300, 0.85);
     
 }
-.user-email{
-    margin: auto;
-    align-items: center;
-    text-align: center;
-}
-
-.follow-unfollow{
-    margin: auto;
-    align-items: center;
-    text-align: center;
-}
-
 
 .post{
     margin: 10px;
@@ -25,7 +13,6 @@
     padding-left: 10px;
     border: 1px;
     background-color: rgb(238, 238, 238);;
-    opacity: 1;
     box-shadow: 2px 2px 2px grey;
 }
 
