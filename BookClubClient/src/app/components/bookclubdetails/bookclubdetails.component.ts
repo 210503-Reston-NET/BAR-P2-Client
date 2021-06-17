@@ -37,21 +37,23 @@ export class BookclubdetailsComponent implements OnInit {
 
   ngOnInit(): void {
     let clubId=this.activatedRoute.snapshot.queryParams['clubId']
-   
+    //console.log("clubId lis---------------------------t")
+    //console.log(clubId)
     //this.bookclubs=this.service.getBookClubById(clubId);
     this.service.getBookClubById(clubId).then((data:any)=>{
       this.bookclubs=data;
       this.newbookClub.name=this.bookclubs.name
       this.newbookClub.description=this.bookclubs.description
-      console.log("post lis---------------------------t")
-      console.log(this.bookclubs)
+      this.newbookClub.bookClubId=clubId
+      //console.log("post lis---------------------------t")
+      //console.log(this.bookclubs)
     })  
 
     
   }
 
   GotoAddClubPost(bookClubId:number, bookClubtitle:string){
-    return this.router.navigate(['Addbookclub'],{ queryParams: { "clubId": bookClubId,"BookClubTitle":bookClubtitle } });
+    return this.router.navigate(['AddClubPost'],{ queryParams: { "clubId": bookClubId,"BookClubTitle":bookClubtitle } });
 
   }
 

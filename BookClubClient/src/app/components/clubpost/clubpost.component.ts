@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { clubPost } from 'src/app/models/clubPost';
 import { BookclubService } from 'src/app/services/bookclub.service';
 import { AuthService } from '@auth0/auth0-angular';
@@ -33,34 +33,38 @@ export class ClubpostComponent implements OnInit {
    token:boolean=true;
 
    // I use activate route to get route parameters
-  constructor(private service:BookclubService,private router:ActivatedRoute,private notificationService:NotificationService,public auth: AuthService) { }
+  constructor(private service:BookclubService,private router:Router,private activatedRoute:ActivatedRoute,private notificationService:NotificationService,public auth: AuthService) { }
  
 
   ngOnInit(): void {
+
     this.auth.user$.subscribe((profile)=>{
       (this.userEmail = profile?.email!);
     })
    
 
-    let clubId=this.router.snapshot.params['clubId']
-    this.newpost.BookClubTitle=this.router.snapshot.params['BookClubTitle'];
+
+    let clubId=this.activatedRoute.snapshot.queryParams['clubId']
+    this.newpost.BookClubTitle=this.activatedRoute.snapshot.queryParams['BookClubTitle']
     this.service.GetClubPostByBookClub(clubId).then(result => { this.clubposts = result });
      }
+
 onSubmit():void{
-  let bookclubId=this.router.snapshot.params['clubId']
+  let bookclubId=this.activatedRoute.snapshot.queryParams['clubId']
   
-  this.newpost.BookClubID=2;
+  this.newpost.BookClubID=bookclubId;
   this.newpost.userEmail=this.userEmail;
-  this.newpost.userEmail="testaccount@gmail.com"
-  this.newpost.BookClubTitle=this.router.snapshot.params['BookClubTitle'];
-  //this.newpost.post=this.p;
+  this.newpost.BookClubTitle=this.activatedRoute.snapshot.queryParams['BookClubTitle']
   this.newpost.date="2021-06-16T15:10:09.721453"
   delete this.newpost.BookClubTitle;
-  //this.service.AddClubPost(this.newpost).then(result=>{console.log(result)});
+  this.service.AddClubPost(this.newpost).then(result=>{console.log(result)});
 
-  console.log("adding clup post")
-  console.log(this.service.AddClubPost(this.newpost).then(result=>{console.log(result)}))
-  console.log("--------------------------------")
+  this.notificationService.showInfo("club post created", "")
+  
+  this.router.navigate(['Viewclubpost'],{ queryParams: { "clubId": bookclubId,"BookClubTitle": this.newpost.BookClubTitle } });
+
+
+  
 }
 
 

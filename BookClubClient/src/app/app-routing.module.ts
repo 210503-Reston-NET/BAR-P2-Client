@@ -82,7 +82,7 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'AddClubPost/:clubId/:BookClubTitle',
+    path: 'AddClubPost',
     component: ClubpostComponent,
     canActivate: [AuthGuard]
   },
