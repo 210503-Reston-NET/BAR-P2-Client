@@ -5,7 +5,7 @@
     </div>
     <div class="follow-unfollow">
         <div class="follow" *ngIf="isFollowing == true">
-            <button>Unfollow</button>
+            <button (click)="UnFollow()">Unfollow</button>
         </div>
         <div class="follow" *ngIf="isFollowing == false">
             <button (click)="Follow()">follow</button>

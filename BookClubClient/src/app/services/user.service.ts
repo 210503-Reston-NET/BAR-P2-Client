@@ -40,6 +40,10 @@ export class UserService {
     return this.http.post<FollowUser>(environment.HOSTAPI + 'FollowUser', followerUser).toPromise();
   }
 
+  UnFollow(followerEmail: string, followedEmail: string): Promise<void>{
+    return this.http.delete<void>( environment.HOSTAPI + 'FollowUser/DeleteFollowersByUser/'+followerEmail+'/'+followedEmail ).toPromise();
+  }
+
   GetComments(UserPostId: number): Promise<UserComment[]>{
     return this.http.get<UserComment[]>(environment.HOSTAPI + 'Comment/GetUserPostComments/'+ UserPostId).toPromise();
   }

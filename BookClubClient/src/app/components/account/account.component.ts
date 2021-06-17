@@ -50,7 +50,19 @@ export class AccountComponent implements OnInit {
   Follow(){
     this.followUser.followerEmail = this.userEmail;
     this.followUser.userEmail = this.accountEmail;
-    this.userService.Follow(this.followUser).then(fl => console.log(fl));
+    this.userService.Follow(this.followUser).then(fl => {
+      console.log(fl);
+      this.userService.IsFollower(this.userEmail, this.accountEmail).then(bl => this.isFollowing = bl);
+    });
+  }
+
+  UnFollow(){
+    this.followUser.followerEmail = this.userEmail;
+    this.followUser.userEmail = this.accountEmail;
+    this.userService.UnFollow(this.userEmail, this.accountEmail).then(fl => {
+      console.log(fl);
+      this.userService.IsFollower(this.userEmail, this.accountEmail).then(bl => this.isFollowing = bl);
+    });
   }
 
   GotoComments(UserPostId: number){
