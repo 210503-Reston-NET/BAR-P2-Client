@@ -82,9 +82,8 @@ export class ProfileComponent implements OnInit {
     );
   }
 
-  MakePost(post:string){
+  MakePost(){
     this.UPost.userEmail = this.userEmail;
-    this.UPost.post = post;
     console.log(this.UPost);
     this.userService.MakePost(this.UPost).then(pst => {
       console.log(pst);

@@ -25,6 +25,7 @@ import { CommentComponent } from './components/comment/comment.component';
 import { ClubpostcommentComponent } from './components/clubpostcomment/clubpostcomment.component';
 import { DataTablesModule } from 'angular-datatables';
 import { BookclubdetailsComponent } from './components/bookclubdetails/bookclubdetails.component';
+import { UserFeedComponent } from './components/user-feed/user-feed.component';
 
 
 @NgModule({
@@ -46,6 +47,7 @@ import { BookclubdetailsComponent } from './components/bookclubdetails/bookclubd
     CommentComponent,
     ClubpostcommentComponent,
     BookclubdetailsComponent,
+    UserFeedComponent,
 
   ],
   imports: [

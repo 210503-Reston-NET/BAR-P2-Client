@@ -4,6 +4,7 @@ import { user, FollowUser } from '../models/user';
 import { userPost } from '../models/userPost';
 import { UserComment } from '../models/comment';
 import { environment } from 'src/environments/environment';
+import { userFeed } from '../models/userFeed'
 
 @Injectable({
   providedIn: 'root'
@@ -45,5 +46,9 @@ export class UserService {
 
   GetPostById(postId: number): Promise<userPost>{
     return this.http.get<userPost>(environment.HOSTAPI + 'UserPost/' + postId).toPromise();
+  }
+
+  GetUserFeed(email: string) : Promise<userFeed[]>{
+    return this.http.get<userFeed[]>(environment.HOSTAPI + "UserFeed/" + email).toPromise();
   }
 }
