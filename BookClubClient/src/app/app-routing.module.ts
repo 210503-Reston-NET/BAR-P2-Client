@@ -13,6 +13,7 @@ import { AddBookclubComponent } from './components/add-bookclub/add-bookclub.com
 import { CommentComponent } from './components/comment/comment.component'
 import { ClubpostcommentComponent } from './components/clubpostcomment/clubpostcomment.component';
 import { BookclubdetailsComponent } from './components/bookclubdetails/bookclubdetails.component';
+import { UserFeedComponent } from './components/user-feed/user-feed.component'
 
 const routes: Routes = [
   {
@@ -59,7 +60,11 @@ const routes: Routes = [
     component: ProfileComponent,
     canActivate: [AuthGuard]
   },
-
+  {
+    path: 'Feed',
+    component: UserFeedComponent,
+    canActivate: [AuthGuard]
+  },
 
   {
     path: 'Addbookclub',

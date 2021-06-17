@@ -1,0 +1,18 @@
+<div class="full-feed">
+    <form  (ngSubmit)="MakePost()" #reviewForm="ngForm">
+        <div class="form-group">
+            <label for="message">Post </label>
+            <input type="text" [(ngModel)]="UPost.post" class="form-control" #name="ngModel"
+                placeholder="Please leave say whats on your mind" name="message">
+        </div>
+        <button type="submit" class="btn btn-secondary">Post</button>
+    </form>
+
+    <div class="feeds">
+        <div class="post" *ngFor="let fd of feed">
+            <h6>{{fd.userEmail}} | {{fd.bookClub}}</h6>
+            <p >{{fd.post}}</p>
+            <p>{{fd.totalLike}} Likes | {{fd.totalDislike}} Dislikes</p>
+        </div>
+    </div>
+</div>

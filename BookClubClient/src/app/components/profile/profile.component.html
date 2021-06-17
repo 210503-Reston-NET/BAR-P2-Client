@@ -79,10 +79,14 @@
         </div>
     </div>
     <div class="user-posts">
-        <div>
-            <input type="text" placeholder="make a post" #post />
-            <button (click)="MakePost(post.value)">POST</button>
-        </div>
+        <form  (ngSubmit)="MakePost()" #reviewForm="ngForm">
+            <div class="form-group">
+                <label for="message">Post </label>
+                <input type="text" [(ngModel)]="UPost.post" class="form-control" #name="ngModel"
+                    placeholder="Please leave say whats on your mind" name="message">
+            </div>
+            <button type="submit" class="btn btn-secondary">Post</button>
+        </form>
         <div *ngIf="userPosts" id="f">
             <div class="post" *ngFor="let userPost of userPosts">
                 <h6>{{userPost.userEmail}}</h6>
