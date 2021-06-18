@@ -1,11 +1,11 @@
 
 export interface book{
-    isbn:string;
-    title:string;
-    author:string;
-    categoryId:string;
-    category: null;
-    imageUrl: string;
+    isbn:string,
+    title:string,
+    author:string,
+    categoryId:string,
+    category: null,
+    imageUrl: string
 }
 
 export interface FavoriteBook{

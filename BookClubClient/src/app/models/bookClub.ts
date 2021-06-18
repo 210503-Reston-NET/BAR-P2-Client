@@ -9,3 +9,20 @@ export interface BookClub {
     user: null,
     userEmail: null
 }
+
+export interface BClub {
+    bookClubId:number,
+    name: string,
+    userEmail: string,
+    user: null,
+    description: string,
+    isbn: string,
+    book: null,
+}
+
+export interface followClub {
+    followClubId: number,
+    followerEmail: string,
+    bookClubId: number,
+    bookClub: null
+}

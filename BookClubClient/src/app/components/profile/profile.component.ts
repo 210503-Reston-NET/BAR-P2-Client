@@ -222,4 +222,8 @@ export class ProfileComponent implements OnInit {
   GotoComments(UserPostId: number){
     this.router.navigate(['Comments'], { queryParams: { UserPostId: UserPostId, ClubPostId: 0 } });
   }
+
+  GotoClubList(){
+    this.router.navigate(['ClubList']);
+  }
 }

@@ -14,6 +14,9 @@ import { CommentComponent } from './components/comment/comment.component'
 import { ClubpostcommentComponent } from './components/clubpostcomment/clubpostcomment.component';
 import { BookclubdetailsComponent } from './components/bookclubdetails/bookclubdetails.component';
 import { UserFeedComponent } from './components/user-feed/user-feed.component';
+import { ClubListComponent } from './components/club-list/club-list.component';
+import { ClubAdminComponent } from './components/club-admin/club-admin.component';
+import { ClubUserComponent } from './components/club-user/club-user.component'
 
 const routes: Routes = [
   {
@@ -38,7 +41,23 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
 
+  {
+    path: 'ClubList',
+    component: ClubListComponent,
+    canActivate: [AuthGuard]
+  },
 
+  {
+    path: 'ClubAdmin',
+    component: ClubAdminComponent,
+    canActivate: [AuthGuard]
+  },
+
+  {
+    path: 'ClubUser',
+    component: ClubUserComponent,
+    canActivate: [AuthGuard]
+  },
 
   {
     path: 'Explore',

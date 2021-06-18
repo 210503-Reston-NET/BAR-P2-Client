@@ -1,0 +1,46 @@
+<div class="full-profile">
+    <div>
+        <h4>please select a book to create a book club</h4>
+        <input type="search" placeholder="Search Books" #search id="search" />
+        <button (click)="BookSearch(search.value)">Search</button>
+    </div>
+
+    <div *ngIf="googleBooks" id="f">
+        <div class="container">
+            <div class="card google-results" *ngFor="let googleBook of googleBooks">
+                <img src={{googleBook.volumeInfo.imageLinks.smallThumbnail}} class="card-img-top" alt="">
+                <div class="card-body">
+                    <h5 class="card-title">{{googleBook.volumeInfo.title}}</h5>
+                    <p class="card-text">{{googleBook.volumeInfo.authors[0]}}</p>
+                    <div *ngIf="auth.user$ | async as user">
+                        <button (click)="SerchValue(googleBook.volumeInfo.industryIdentifiers[0].identifier, googleBook.volumeInfo.title, googleBook.volumeInfo.authors[0], googleBook.volumeInfo.categories[0], googleBook.volumeInfo.imageLinks.thumbnail)">add Book</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf = "clubToAdd.isbn != ''">
+        <h5> Book: {{title}}</h5>
+        <form (ngSubmit)="onSubmit()" #ClubListForm="ngForm">
+            <div class="form-group">
+                <input type="text" [(ngModel)]="clubToAdd.name" class="form-control" #name="ngModel"
+                    placeholder="ADD A CLUB NAME" name="name">
+            </div>
+            <div class="form-group">
+                <input type="text" [(ngModel)]="clubToAdd.description" class="form-control" #name="ngModel"
+                    placeholder="ADD A DISCRIPTION" name="description">
+            </div>
+            <button type="submit" class="btn btn-secondary">Add Club</button>
+        </form>
+    </div>
+    <div class="clubs">
+        <div class="bookclubs" *ngFor="let club of bookClubs">
+            <div class="bookclub" (click) = "GoToAdminView(club.bookClubId)">
+                <p>{{club.name}}</p>
+            </div>
+        </div>
+    </div>
+    
+
+</div>

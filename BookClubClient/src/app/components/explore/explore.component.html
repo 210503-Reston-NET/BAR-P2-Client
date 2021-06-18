@@ -1,11 +1,26 @@
 <div class="full-explore">
-    <div>
-        <input type="search" placeholder="Search For a user" #search id="search" />
-        <button (click)="UserSearch(search.value)">Search</button>
+    <div class="user-search">
+        <div>
+            <input type="search" placeholder="Search For a user" #search id="search" />
+            <button (click)="UserSearch(search.value)">Search</button>
+        </div>
+
+        <div *ngIf="userFound" id="f" >
+            <div (click)="GoToAccount(userFound.userEmail)"><h6>{{userFound.userEmail}}</h6></div>
+        </div>
     </div>
 
-    <div *ngIf="userFound" id="f" >
-        <div (click)="GoToAccount(userFound.userEmail)"><h6>{{userFound.userEmail}}</h6></div>
+    <div class="club-search">
+        <div>
+            <input type="clubSearch" placeholder="Search For a club" #clubSearch id="clubSearch" />
+            <button (click)="SearchClub(clubSearch.value)">Search</button>
+        </div>
+
+        <div *ngIf="Clubs" id="f" >
+            <div class="club" *ngFor="let club of Clubs">
+                <div (click)="GoToClub(club.bookClubId)"><h6>{{club.name}}</h6></div>
+            </div>
+        </div>
     </div>
 
 </div>

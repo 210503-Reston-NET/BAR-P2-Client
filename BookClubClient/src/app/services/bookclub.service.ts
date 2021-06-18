@@ -4,6 +4,8 @@ import { environment } from 'src/environments/environment';
 import { book, FavoriteBook } from '../models/book';
 import { BookClub } from '../models/bookClub';
 import { clubPost } from '../models/clubPost';
+import { BClub } from '../models/bookClub';
+import { followClub } from '../models/bookClub'
 
 @Injectable({
   providedIn: 'root'
@@ -32,9 +34,30 @@ export class BookclubService {
     return this.http.get<BookClub>(environment.HOSTAPI+"BookClub/"+id).toPromise().then(x=>x);
   }
 
+  GetBCById(id:number) : Promise<BClub>{
+    return this.http.get<BClub>(environment.HOSTAPI+"BookClub/"+id).toPromise().then(x=>x);
+  }
+
+  GetBookClubByUser(email: string) :Promise<BClub[]> {
+    return this.http.get<BClub[]>(environment.HOSTAPI+ 'BookClub/BookClubByUser/' + email).toPromise();
+  }
+
+  GetBookClubByName(name: string) :Promise<BClub[]>{
+    console.log(name);
+    return this.http.get<BClub[]>(environment.HOSTAPI + 'BookClub/BookClubByName/' + name).toPromise();
+  }
+
   AddBookClub(newBookclub:BookClub) : Promise<BookClub>{
   
     return this.http.post<BookClub>(environment.HOSTAPI+"BookClub", newBookclub).toPromise().then(bk => bk);
+  }
+
+  AddBC(bookClub: BClub) : Promise<BClub>{
+    return this.http.post<BClub>(environment.HOSTAPI+"BookClub", bookClub).toPromise();
+  }
+
+  ChangeBookClubBook(id: number, club:BClub): Promise<void>{
+    return this.http.put<void>(environment.HOSTAPI+ "BookClub/" + id, club).toPromise();
   }
 
   AddBook(newBook:book) : Promise<book>{
@@ -70,5 +93,18 @@ export class BookclubService {
 
   GetClubPostByID(postId: number) : Promise<clubPost>{
     return this.http.get<clubPost>(environment.HOSTAPI+ "ClubPost/" + postId).toPromise();
+  }
+
+  IsFollower(email: string, id: number): Promise<boolean>{
+    return this.http.get<boolean>(environment.HOSTAPI + 'FollowClub/GetFollowersByUser/'+email+'/'+id).toPromise();
+  }
+
+  Follow(followerUser: followClub): Promise<followClub>{
+    return this.http.post<followClub>(environment.HOSTAPI + 'FollowClub', followerUser).toPromise();
+  }
+
+
+  UnFollow(followerEmail: string, clubId: number): Promise<void>{
+    return this.http.delete<void>( environment.HOSTAPI + 'FollowClub/DeleteFollowersByUser/'+followerEmail+'/'+clubId ).toPromise();
   }
 }

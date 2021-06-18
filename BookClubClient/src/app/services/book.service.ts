@@ -55,6 +55,10 @@ export class BookService {
   GetFavoriteBooks(email:string): Promise<book[]>{
     return this.http.get<book[]>(environment.HOSTAPI+'FavoriteBook/'+ email).toPromise();
   }
+
+  GetBookByISBN(isbn: string): Promise<book>{
+    return this.http.get<book>(environment.HOSTAPI + 'Book/' + isbn).toPromise();
+  }
   /*getBooks():Promise<book[]>{
     return this.http.get<book[]>(this.host).toPromise();
   }
