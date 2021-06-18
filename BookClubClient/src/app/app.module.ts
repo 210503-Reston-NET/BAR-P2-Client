@@ -26,6 +26,9 @@ import { ClubpostcommentComponent } from './components/clubpostcomment/clubpostc
 import { DataTablesModule } from 'angular-datatables';
 import { BookclubdetailsComponent } from './components/bookclubdetails/bookclubdetails.component';
 import { UserFeedComponent } from './components/user-feed/user-feed.component';
+import { ClubListComponent } from './components/club-list/club-list.component';
+import { ClubAdminComponent } from './components/club-admin/club-admin.component';
+import { ClubUserComponent } from './components/club-user/club-user.component';
 
 
 
@@ -49,6 +52,9 @@ import { UserFeedComponent } from './components/user-feed/user-feed.component';
     ClubpostcommentComponent,
     BookclubdetailsComponent,
     UserFeedComponent,
+    ClubListComponent,
+    ClubAdminComponent,
+    ClubUserComponent,
 
   ],
   imports: [

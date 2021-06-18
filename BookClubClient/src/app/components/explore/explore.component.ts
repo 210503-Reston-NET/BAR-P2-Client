@@ -3,7 +3,8 @@ import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
 import { user } from '../../models/user';
 import { AuthService } from '@auth0/auth0-angular';
-
+import { BookclubService } from '../../services/bookclub.service';
+import { BClub } from 'src/app/models/bookClub';
 
 @Component({
   selector: 'app-explore',
@@ -12,6 +13,7 @@ import { AuthService } from '@auth0/auth0-angular';
 })
 export class ExploreComponent implements OnInit {
 
+  Clubs : BClub[] = [];
   userFound: user = {
     userEmail: "",
     password: "",
@@ -21,14 +23,23 @@ export class ExploreComponent implements OnInit {
 
   userEmail: string ="";
 
-  constructor(private userService: UserService,private router: Router, public auth: AuthService) { }
+  constructor(private clubService: BookclubService, private userService: UserService,private router: Router, public auth: AuthService) { }
 
   ngOnInit(): void {
   }
 
   UserSearch(email:string){
     this.userService.GetUser(email).then(usr => this.userFound = usr);
-    this.router.navigate(['Explore'])
+  }
+
+  ClubSearch(name: string){
+    console.log("test log")
+    console.log(name);
+    this.clubService.GetBookClubByName(name).then(bks => this.Clubs = bks);
+  }
+
+  SearchClub(name: string){
+    this.clubService.GetBookClubByName(name).then(bks => this.Clubs = bks);
   }
 
   GoToAccount(accountEmail : string){
@@ -36,6 +47,15 @@ export class ExploreComponent implements OnInit {
       (profile) => {
         (this.userEmail = profile?.email!);
         this.router.navigate(['Account'], { queryParams: { accountEmail: accountEmail, userEmail: this.userEmail } });
+      }
+    );
+  }
+
+  GoToClub(clubId : number){
+    this.auth.user$.subscribe(
+      (profile) => {
+        (this.userEmail = profile?.email!);
+        this.router.navigate(['ClubUser'], { queryParams: { userEmail: this.userEmail, clubId: clubId } });
       }
     );
   }

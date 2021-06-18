@@ -1,0 +1,59 @@
+<div class="full-body">
+    <div class="bookclub-info">
+        <h3>{{club.name}}</h3>
+        <p>{{club.description}}</p>
+        <div class="book-image">
+            <img src={{bookToAdd.imageUrl}} alt="">
+        </div>
+        <h5>{{bookToAdd.title}} by {{bookToAdd.author}}</h5>
+    </div>
+
+    <div>
+        <div class="search-google">
+            <h6>please search for a book to change current book</h6>
+            <input type="search" placeholder="Search Books" #search id="search" />
+            <button (click)="BookSearch(search.value)">Search</button>
+        </div>
+
+        <div class="container">
+            <div class="card google-results" *ngFor="let googleBook of googleBooks">
+                <img src={{googleBook.volumeInfo.imageLinks.smallThumbnail}} class="card-img-top" alt="">
+                <div class="card-body">
+                    <h5 class="card-title">{{googleBook.volumeInfo.title}}</h5>
+                    <p class="card-text">{{googleBook.volumeInfo.authors[0]}}</p>
+                    <div *ngIf="auth.user$ | async as user">
+                        <button (click)="ChangeBooK(googleBook.volumeInfo.industryIdentifiers[0].identifier, googleBook.volumeInfo.title, googleBook.volumeInfo.authors[0], googleBook.volumeInfo.categories[0], googleBook.volumeInfo.imageLinks.thumbnail)">add Book</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="add-post">
+
+    </div>
+
+    <div class="post-form">
+        <form  (ngSubmit)="AddPost()" #reviewForm="ngForm">
+            <div class="form-group">
+                <label for="message">Post </label>
+                <input type="text" [(ngModel)]="post.post" class="form-control" #name="ngModel"
+                    placeholder="Please leave say whats on your mind" name="message">
+            </div>
+            <button type="submit" class="btn btn-secondary">Post</button>
+        </form>
+    </div>
+
+    <div class="posts">
+        <div class="post" *ngFor="let post of posts">
+            <h6>{{post.userEmail}}</h6>
+            <p (click) ="GotoComments(post.clubPostId)">{{post.post}}</p>
+            <p>{{post.totalLike}} Likes | {{post.totalDislike}} Dislikes</p>
+            <p>
+                <i (click)="Like(post.clubPostId)" class="fa fa-thumbs-up"></i>  | 
+                <i (click)="Dislike(post.clubPostId)" class="fa fa-thumbs-down"></i>
+            </p>
+        </div>
+    </div>
+
+</div>
