@@ -6,6 +6,12 @@
     background: rgba(300, 300, 300, 0.85);
 }
 
+.follow-unfollow{
+    margin: auto;
+    align-items: center;
+    text-align: center;
+}
+
 .bookclub-info{
     margin: auto;
     align-items: center;
