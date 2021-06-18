@@ -8,9 +8,9 @@ describe('BookclubComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BookclubComponent ]
+      declarations: [BookclubComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
@@ -22,4 +22,6 @@ describe('BookclubComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+
 });
